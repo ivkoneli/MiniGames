@@ -18,7 +18,8 @@ const GY       = HUD_H + PROMPT_H;
 const GPAD     = Math.round(W * 0.030);
 const BTN_GAP  = Math.round(W * 0.012);
 
-const IS_NARROW = W < 900;
+// Compare CSS pixels (not physical) for narrow/portrait detection
+const IS_NARROW = (window.visualViewport?.width ?? window.innerWidth) < 900;
 
 // Narrow: full-width graph on top (60%), 2×2 button grid below
 // Wide:   graph on left, vertical button sidebar on right

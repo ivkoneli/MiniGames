@@ -5,7 +5,15 @@
       "Bash(node -e \"require\\(''fs''\\).writeFileSync\\(''f:/Desktop/poso/MiniGames/src/games/SortingGame/SortingGameScene.ts'', require\\(''fs''\\).readFileSync\\(''f:/Desktop/poso/MiniGames/src/games/SortingGame/SortingGameScene.ts'', ''utf8''\\).slice\\(0,5\\)\\)\")",
       "Bash(rm \"f:/Desktop/poso/MiniGames/write_scene.mjs\")",
       "Bash(npm run build)",
-      "Bash(grep -rn \"zoom:\" src/games/*/main.ts)"
+      "Bash(grep -rn \"zoom:\" src/games/*/main.ts)",
+      "WebFetch(domain:haptics.lochie.me)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -sI \"https://haptics.lochie.me/\")",
+      "Bash(curl -s \"https://haptics.lochie.me/\")",
+      "Bash(curl -s \"https://haptics.lochie.me/assets/index-CjA15UBB.js\")",
+      "Bash(python3 -c \"import sys; d=sys.stdin.read\\(\\); idx=d.find\\(''Haptics''\\); print\\(d[idx:idx+500] if idx>=0 else ''NOT FOUND''\\)\")",
+      "Bash(node -e \":*)",
+      "Bash(grep -l \"haptics\\\\|Haptics\" games/*/index.html)"
     ]
   }
 }
