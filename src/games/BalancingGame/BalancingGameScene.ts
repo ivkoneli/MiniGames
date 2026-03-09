@@ -4,8 +4,9 @@ import type { BalancingGameConfig, BalancingLevel, EquationTerm } from './types'
 
 // ─── Layout — all dynamic so the game scales to any screen ────────────────────
 
-const H       = window.visualViewport?.height ?? window.innerHeight;
-const W       = Math.min(window.visualViewport?.width ?? window.innerWidth, Math.round(H * (4 / 3)));
+const _dpr    = window.devicePixelRatio || 1;
+const H       = Math.round((window.visualViewport?.height ?? window.innerHeight) * _dpr);
+const W       = Math.min(Math.round((window.visualViewport?.width ?? window.innerWidth) * _dpr), Math.round(H * (4 / 3)));
 
 const HUD_H        = Math.round(H * 0.065);
 const PIVOT_Y      = Math.round(H * 0.62);

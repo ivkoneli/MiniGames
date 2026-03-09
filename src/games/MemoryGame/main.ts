@@ -12,20 +12,20 @@ class BootScene extends Phaser.Scene {
   create(): void  { this.scene.start(MemoryGameScene.SCENE_KEY, gameConfig); }
 }
 
-const gameH = window.visualViewport?.height ?? window.innerHeight;
-const gameW = Math.min(window.visualViewport?.width ?? window.innerWidth, Math.round(gameH * (4 / 3)));
+const dpr = window.devicePixelRatio || 1;
+const cssH = window.visualViewport?.height ?? window.innerHeight;
+const cssW = Math.min(window.visualViewport?.width ?? window.innerWidth, Math.round(cssH * (4 / 3)));
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
-  width: gameW,
-  height: gameH,
+  width: Math.round(cssW * dpr),
+  height: Math.round(cssH * dpr),
   backgroundColor: '#070810',
   render: { antialias: true, pixelArt: false },
   scene: [BootScene, MemoryGameScene],
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    zoom: window.devicePixelRatio || 1,
   },
 });
 
