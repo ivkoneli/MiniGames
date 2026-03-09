@@ -26,8 +26,9 @@ class BootScene extends Phaser.Scene {
 
 // ─── Phaser game instance ──────────────────────────────────────────────────────
 
-const gameH = window.innerHeight;
-const gameW = Math.min(window.innerWidth, Math.round(gameH * (4 / 3)));
+const dpr   = window.devicePixelRatio || 1;
+const gameH = Math.round(window.innerHeight * dpr);
+const gameW = Math.min(Math.round(window.innerWidth * dpr), Math.round(gameH * (4 / 3)));
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,

@@ -24,17 +24,18 @@ export class AudioManager {
    *   correct.mp3 | wrong.mp3 | drop.mp3 | click.mp3 | win.mp3 | tick.mp3
    */
   static preloadDefaults(scene: Phaser.Scene): void {
+    const base = import.meta.env.BASE_URL;
     const files: [string, string][] = [
-      ['sfx-correct', '/sounds/correct.mp3'],
-      ['sfx-wrong',   '/sounds/wrong.mp3'],
-      ['sfx-drop',    '/sounds/drop.mp3'],
-      ['sfx-click',   '/sounds/click.mp3'],
-      ['sfx-win',     '/sounds/win.mp3'],
-      ['sfx-tick',    '/sounds/tick.mp3'],
-      ['sfx-place',   '/sounds/place.mp3'],    // block lands on stack
-      ['sfx-collide', '/sounds/collide.mp3'],  // block hits ground during collapse
-      ['sfx-hook',    '/sounds/hook.mp3'],     // looping hook movement ambient
-      ['sfx-whoosh',  '/sounds/whoosh.mp3'],   // wind whoosh during tower sway
+      ['sfx-correct', `${base}sounds/correct.mp3`],
+      ['sfx-wrong',   `${base}sounds/wrong.mp3`],
+      ['sfx-drop',    `${base}sounds/drop.mp3`],
+      ['sfx-click',   `${base}sounds/click.mp3`],
+      ['sfx-win',     `${base}sounds/win.mp3`],
+      ['sfx-tick',    `${base}sounds/tick.mp3`],
+      ['sfx-place',   `${base}sounds/place.mp3`],
+      ['sfx-collide', `${base}sounds/collide.mp3`],
+      ['sfx-hook',    `${base}sounds/hook.mp3`],
+      ['sfx-whoosh',  `${base}sounds/whoosh.mp3`],
     ];
     for (const [key, path] of files) {
       if (!scene.cache.audio.exists(key)) {

@@ -65,19 +65,19 @@ export class StackTheOrderScene extends BaseGameScene {
   // ─── Persistent UI (drawn once, survives level reloads) ───────────────────
 
   protected setupUI(): void {
-    const W = Math.min(window.innerWidth, Math.round(window.innerHeight * (4 / 3)));
-    const H = window.innerHeight;
+    // Use scale.width/height to stay in Phaser's physical-pixel coordinate space
+    const W  = this.scale.width;
+    const H  = this.scale.height;
+    const fs = `${Math.round(H * 0.018)}px`;
 
-    this.add.text(14, 12, '← Menu', {
-      fontSize: '13px', color: '#475569',
+    this.add.text(Math.round(W * 0.036), Math.round(H * 0.014), '← Menu', {
+      fontSize: fs, color: '#475569',
       fontFamily: 'Space Grotesk, sans-serif',
     }).setDepth(20).setInteractive({ useHandCursor: true })
-      .on('pointerover', function (this: Phaser.GameObjects.Text) { this.setColor('#94a3b8'); })
-      .on('pointerout',  function (this: Phaser.GameObjects.Text) { this.setColor('#475569'); })
       .on('pointerdown', () => { window.location.href = import.meta.env.BASE_URL; });
 
-    this.levelText = this.add.text(W - 14, 12, '', {
-      fontSize: '13px', color: '#64748b',
+    this.levelText = this.add.text(W - Math.round(W * 0.036), Math.round(H * 0.014), '', {
+      fontSize: fs, color: '#64748b',
       fontFamily: 'Space Grotesk, sans-serif',
     }).setOrigin(1, 0).setDepth(20);
   }
@@ -92,8 +92,10 @@ export class StackTheOrderScene extends BaseGameScene {
 
     // HUD band at the top contains question text; hook lives below it
     this.HUD_H     = Math.round(this.H * 0.145);
-    this.BLOCK_W   = Math.round(this.W * 0.155);   // narrower than before
-    this.BLOCK_H   = Math.round(this.H * 0.083);   // taller than before
+    this.BLOCK_W   = Math.round(this.W * 0.155);
+    // On portrait mobile, H >> W so 0.083*H makes very tall blocks.
+    // Cap BLOCK_H at BLOCK_W*1.1 so blocks stay roughly square on all screens.
+    this.BLOCK_H   = Math.min(Math.round(this.H * 0.083), Math.round(this.BLOCK_W * 1.1));
     this.BLOCK_GAP = Math.max(3, Math.round(this.H * 0.006));
     this.GROUND_Y  = Math.round(this.H * 0.820);
     this.SEL_Y     = Math.round(this.H * 0.912);
@@ -335,6 +337,7 @@ export class StackTheOrderScene extends BaseGameScene {
         fontFamily: 'Space Grotesk, sans-serif',
         fontSize: `${Math.round(H * 0.022)}px`,
         color: COL_TEXT, align: 'center',
+        wordWrap: { width: BLOCK_W - 8, useAdvancedWrap: true },
       }).setOrigin(0.5);
 
       const startY = y + Math.round(H * 0.020);

@@ -178,34 +178,33 @@ export class SortingGameScene extends BaseGameScene {
     this.ZONE_H = ZONE_BOT - ZONE_TOP;
     this.ZONE_Y = ZONE_TOP + this.ZONE_H / 2;
 
-    this.leftZoneBg  = this.add.rectangle(W * 0.21, this.ZONE_Y, W * 0.36, this.ZONE_H, 0x7c3aed, 0.07).setDepth(1);
-    this.rightZoneBg = this.add.rectangle(W * 0.79, this.ZONE_Y, W * 0.36, this.ZONE_H, 0x00aacc, 0.07).setDepth(1);
+    // Each zone takes 50% of the width (no gap — divider sits on top)
+    this.leftZoneBg  = this.add.rectangle(W * 0.25, this.ZONE_Y, W * 0.50, this.ZONE_H, 0x7c3aed, 0.07).setDepth(1);
+    this.rightZoneBg = this.add.rectangle(W * 0.75, this.ZONE_Y, W * 0.50, this.ZONE_H, 0x00aacc, 0.07).setDepth(1);
     this.add.rectangle(W / 2, this.ZONE_Y, 1.5, this.ZONE_H, 0x252940, 0.8).setDepth(2);
 
     // ── Zone labels ───────────────────────────────────────────────────────
     const zStyle = { fontFamily: FONT, fontSize: fs(0.042), fontStyle: 'bold', align: 'center' as const };
-    this.leftZoneLabel  = this.add.text(W * 0.15, this.CARD_Y, '', { ...zStyle, color: '#8b5cf6' })
-      .setOrigin(0.5).setDepth(5).setWordWrapWidth(W * 0.24);
-    this.rightZoneLabel = this.add.text(W * 0.85, this.CARD_Y, '', { ...zStyle, color: '#00d4ff' })
-      .setOrigin(0.5).setDepth(5).setWordWrapWidth(W * 0.24);
+    this.leftZoneLabel  = this.add.text(W * 0.20, this.CARD_Y, '', { ...zStyle, color: '#8b5cf6' })
+      .setOrigin(0.5).setDepth(5).setWordWrapWidth(W * 0.36);
+    this.rightZoneLabel = this.add.text(W * 0.80, this.CARD_Y, '', { ...zStyle, color: '#00d4ff' })
+      .setOrigin(0.5).setDepth(5).setWordWrapWidth(W * 0.36);
 
     const arrowY = this.CARD_Y + H * 0.115;
-    this.add.text(W * 0.09, arrowY, '<--', { fontFamily: FONT, fontSize: fs(0.040), color: '#1e2236' }).setOrigin(0.5).setDepth(3);
-    this.add.text(W * 0.91, arrowY, '-->', { fontFamily: FONT, fontSize: fs(0.040), color: '#1e2236' }).setOrigin(0.5).setDepth(3);
+    this.add.text(W * 0.07, arrowY, '<--', { fontFamily: FONT, fontSize: fs(0.040), color: '#1e2236' }).setOrigin(0.5).setDepth(3);
+    this.add.text(W * 0.93, arrowY, '-->', { fontFamily: FONT, fontSize: fs(0.040), color: '#1e2236' }).setOrigin(0.5).setDepth(3);
 
-    // ── Left / Right buttons ──────────────────────────────────────────────
-    const BTN_W = Math.min(W * 0.30, 230);
+    // ── Left / Right buttons — each 44% wide, centered in their zone ──────
+    const BTN_W = W * 0.44;
     const BTN_H = Math.min(H * 0.090, 70);
     const BTN_Y = H * 0.880;
 
-    this.leftBtnBg = this.add.rectangle(W * 0.27, BTN_Y, BTN_W, BTN_H, 0x0d0f1e)
+    this.leftBtnBg = this.add.rectangle(W * 0.25, BTN_Y, BTN_W, BTN_H, 0x0d0f1e)
       .setStrokeStyle(2, 0x7c3aed, 0.8).setInteractive({ useHandCursor: true }).setDepth(30);
-    this.leftBtnLbl = this.add.text(W * 0.27, BTN_Y, '<- Left', {
+    this.leftBtnLbl = this.add.text(W * 0.25, BTN_Y, '<- Left', {
       fontFamily: FONT, fontSize: fs(0.032), fontStyle: 'bold', color: '#8b5cf6',
     }).setOrigin(0.5).setDepth(31);
     this.leftBtnBg
-      .on('pointerover', () => { this.leftBtnBg.setFillStyle(0x1a0a2e).setStrokeStyle(2.5, 0x7c3aed, 1); })
-      .on('pointerout',  () => { this.leftBtnBg.setFillStyle(0x0d0f1e).setStrokeStyle(2, 0x7c3aed, 0.8); })
       .on('pointerdown', () => {
         if (!this.handleChoice('left')) return;
         this.tweens.add({ targets: [this.leftBtnBg, this.leftBtnLbl], scaleX: 0.92, scaleY: 0.92, duration: 75 });
@@ -214,14 +213,12 @@ export class SortingGameScene extends BaseGameScene {
         this.tweens.add({ targets: [this.leftBtnBg, this.leftBtnLbl], scaleX: 1, scaleY: 1, duration: 180, ease: 'Back.Out' });
       });
 
-    this.rightBtnBg = this.add.rectangle(W * 0.73, BTN_Y, BTN_W, BTN_H, 0x0d0f1e)
+    this.rightBtnBg = this.add.rectangle(W * 0.75, BTN_Y, BTN_W, BTN_H, 0x0d0f1e)
       .setStrokeStyle(2, 0x00aacc, 0.8).setInteractive({ useHandCursor: true }).setDepth(30);
-    this.rightBtnLbl = this.add.text(W * 0.73, BTN_Y, 'Right ->', {
+    this.rightBtnLbl = this.add.text(W * 0.75, BTN_Y, 'Right ->', {
       fontFamily: FONT, fontSize: fs(0.032), fontStyle: 'bold', color: '#00d4ff',
     }).setOrigin(0.5).setDepth(31);
     this.rightBtnBg
-      .on('pointerover', () => { this.rightBtnBg.setFillStyle(0x001a22).setStrokeStyle(2.5, 0x00aacc, 1); })
-      .on('pointerout',  () => { this.rightBtnBg.setFillStyle(0x0d0f1e).setStrokeStyle(2, 0x00aacc, 0.8); })
       .on('pointerdown', () => {
         if (!this.handleChoice('right')) return;
         this.tweens.add({ targets: [this.rightBtnBg, this.rightBtnLbl], scaleX: 0.92, scaleY: 0.92, duration: 75 });
@@ -624,11 +621,14 @@ export class SortingGameScene extends BaseGameScene {
         this.bestStreak = Math.max(this.bestStreak, this.streak);
         this.onCorrect(this.CARD_X, this.CARD_Y);
         // Override the fixed-rate correct sound with streak-pitched version
-        this.sound.stopByKey('sfx-correct');
-        const streakFactor = Math.min(this.streak - 1, 9);
-        this.sound.play('sfx-correct', {
-          volume: 0.65 + streakFactor * 0.015,
-          rate: 1.0 + streakFactor * 0.03 });
+        if (this.cache.audio.exists('sfx-correct')) {
+          this.sound.stopByKey('sfx-correct');
+          const streakFactor = Math.min(this.streak - 1, 9);
+          this.sound.play('sfx-correct', {
+            volume: 0.65 + streakFactor * 0.015,
+            rate: 1.0 + streakFactor * 0.03,
+          });
+        }
         this.flashZone(direction === 'left', true);
         this.spawnSparkles(this.CARD_X, this.CARD_Y, 0x10b981);
         if (this.streak >= 3) this.showStreakBurst();
@@ -657,9 +657,9 @@ export class SortingGameScene extends BaseGameScene {
   // ── Visual effects ────────────────────────────────────────────────────────
 
   private flashZone(isLeft: boolean, isCorrect: boolean): void {
-    const x     = isLeft ? this.W * 0.21 : this.W * 0.79;
+    const x     = isLeft ? this.W * 0.25 : this.W * 0.75;
     const col   = isCorrect ? 0x10b981 : 0xef4444;
-    const flash = this.add.rectangle(x, this.ZONE_Y, this.W * 0.36, this.ZONE_H, col, 0).setDepth(8);
+    const flash = this.add.rectangle(x, this.ZONE_Y, this.W * 0.50, this.ZONE_H, col, 0).setDepth(8);
     this.tweens.add({
       targets: flash, alpha: { from: 0, to: isCorrect ? 0.32 : 0.24 },
       duration: 130, yoyo: true, repeat: isCorrect ? 0 : 1,
