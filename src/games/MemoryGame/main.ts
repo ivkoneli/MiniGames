@@ -25,7 +25,7 @@ const game = new Phaser.Game({
   scene: [BootScene, MemoryGameScene],
   scale: {
     mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
+    autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
   },
 });
 

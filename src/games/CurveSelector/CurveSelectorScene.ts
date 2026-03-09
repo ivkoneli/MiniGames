@@ -209,8 +209,13 @@ export class CurveSelectorScene extends BaseGameScene {
     const ox = bg.x;
     this.tweens.add({
       targets: bg, x: { from: ox - 9, to: ox + 9 }, duration: 55, repeat: 3, yoyo: true, ease: 'Sine.InOut',
-      // border stays red permanently — do NOT reset to white
-      onComplete: () => { bg.x = ox; bg.setStrokeStyle(2, 0xef4444, 0.75); this.canInteract = true; },
+      onComplete: () => {
+        bg.x = ox;
+        bg.setStrokeStyle(2, 0xef4444, 0.75);
+        this.canInteract = true;
+        // Reset border back to default after 1.2 s
+        this.time.delayedCall(1200, () => { bg.setStrokeStyle(1, 0xffffff, 0.08); });
+      },
     });
   }
 

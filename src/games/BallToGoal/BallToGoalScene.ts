@@ -21,11 +21,11 @@ const BTN_GAP  = Math.round(W * 0.012);
 // Compare CSS pixels (not physical) for narrow/portrait detection
 const IS_NARROW = (window.visualViewport?.width ?? window.innerWidth) < 900;
 
-// Narrow: full-width graph on top (60%), 2×2 button grid below
+// Narrow: full-width graph on top (52%), 2×2 button grid below
 // Wide:   graph on left, vertical button sidebar on right
 const GW = IS_NARROW ? W - GX * 2 : W - 240;
 const GH = IS_NARROW
-  ? Math.round((H - GY - Math.round(H * 0.005)) * 0.60)
+  ? Math.round((H - GY - Math.round(H * 0.005)) * 0.52)
   : H - GY - Math.round(H * 0.005);
 
 const BTN_W = IS_NARROW
@@ -193,7 +193,7 @@ export class BallToGoalScene extends BaseGameScene {
     const dotR   = Math.round(H * 0.007);
     const glowR  = Math.round(H * 0.014);
     const labelOffY = Math.round(H * 0.022);
-    const lblFs  = `${Math.round(H * 0.010)}px`;
+    const lblFs  = `${Math.round(H * 0.016)}px`;
 
     const gs = this.coord.mathToScreen(level.goalPos[0], level.goalPos[1]);
     const goalRing = this.track(
@@ -252,8 +252,8 @@ export class BallToGoalScene extends BaseGameScene {
     const gridY  = GY + GH + Math.round(H * 0.010); // y of the 2×2 area (narrow only)
     const totalH = level.options.length * BTN_H + (level.options.length - 1) * BTN_GAP;
     const sideStartY = GY + (GH - totalH) / 2; // centred vertically in sidebar (wide only)
-    const fs16 = `${Math.round(H * 0.017)}px`;
-    const fs13 = `${Math.round(H * 0.013)}px`;
+    const fs16 = `${Math.round(H * 0.022)}px`;
+    const fs13 = `${Math.round(H * 0.019)}px`;
     const stripPad = Math.round(W * 0.003);
     const letterPadX = Math.round(W * 0.012);
     const letterPadY = Math.round(BTN_H * 0.22);

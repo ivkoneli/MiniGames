@@ -15,7 +15,8 @@
       "Bash(node -e \":*)",
       "Bash(grep -l \"haptics\\\\|Haptics\" games/*/index.html)",
       "WebFetch(domain:unpkg.com)",
-      "WebFetch(domain:cdn.jsdelivr.net)"
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "Bash(grep -n \"CENTER_BOTH\\\\|autoCenter\" src/games/*/main.ts)"
     ]
   }
 }

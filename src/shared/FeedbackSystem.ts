@@ -15,8 +15,9 @@ export class FeedbackSystem {
     const cx = x ?? this.scene.scale.width / 2;
     const cy = y ?? this.scene.scale.height / 2;
 
+    const fs = Math.round(this.scene.scale.height * 0.10);
     const text = this.scene.add
-      .text(cx, cy, '✓', { fontSize: '72px', color: '#10b981' })
+      .text(cx, cy, '✓', { fontSize: `${fs}px`, color: '#10b981' })
       .setOrigin(0.5)
       .setDepth(200)
       .setAlpha(0);
@@ -32,7 +33,7 @@ export class FeedbackSystem {
         this.scene.tweens.add({
           targets: text,
           alpha: 0,
-          y: cy - 50,
+          y: cy - Math.round(this.scene.scale.height * 0.04),
           duration: 400,
           delay: 250,
           ease: 'Quad.In',
