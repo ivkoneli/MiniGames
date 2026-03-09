@@ -559,13 +559,16 @@ export class BallToGoalScene extends BaseGameScene {
     this.simState = 'failed';
     if (this.simTimeout) { this.simTimeout.destroy(); this.simTimeout = null; }
 
-    // Red flash on ALL selected buttons
+    // Red flash on ALL selected buttons — auto-reset after 1.2s
     this.selectedFnIndices.forEach(idx => {
       const b = this.buttonBgs[idx];
       if (!b || !b.active) return;
       b.setStrokeStyle(3, 0xef4444, 1);
       const flash = this.add.rectangle(b.x, b.y, b.width, b.height, 0xef4444, 0.18).setDepth(15);
       this.tweens.add({ targets: flash, alpha: 0, duration: 380, onComplete: () => flash.destroy() });
+      this.time.delayedCall(1200, () => {
+        if (b.active) b.setStrokeStyle(1, this.buttonColors[idx], 0.22);
+      });
     });
 
     // Show ✗ at graph centre — NOT at ball position (which may be off-screen)

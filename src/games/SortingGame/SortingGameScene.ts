@@ -183,16 +183,17 @@ export class SortingGameScene extends BaseGameScene {
     this.rightZoneBg = this.add.rectangle(W * 0.75, this.ZONE_Y, W * 0.50, this.ZONE_H, 0x00aacc, 0.07).setDepth(1);
     this.add.rectangle(W / 2, this.ZONE_Y, 1.5, this.ZONE_H, 0x252940, 0.8).setDepth(2);
 
-    // ── Zone labels ───────────────────────────────────────────────────────
-    const zStyle = { fontFamily: FONT, fontSize: fs(0.042), fontStyle: 'bold', align: 'center' as const };
-    this.leftZoneLabel  = this.add.text(W * 0.20, this.CARD_Y, '', { ...zStyle, color: '#8b5cf6' })
+    // ── Zone labels — placed at top of zone so they don't overlap the card ──
+    const zoneLabelY = ZONE_TOP + H * 0.055;
+    const zStyle = { fontFamily: FONT, fontSize: fs(0.036), fontStyle: 'bold', align: 'center' as const };
+    this.leftZoneLabel  = this.add.text(W * 0.22, zoneLabelY, '', { ...zStyle, color: '#8b5cf6' })
       .setOrigin(0.5).setDepth(5).setWordWrapWidth(W * 0.36);
-    this.rightZoneLabel = this.add.text(W * 0.80, this.CARD_Y, '', { ...zStyle, color: '#00d4ff' })
+    this.rightZoneLabel = this.add.text(W * 0.78, zoneLabelY, '', { ...zStyle, color: '#00d4ff' })
       .setOrigin(0.5).setDepth(5).setWordWrapWidth(W * 0.36);
 
-    const arrowY = this.CARD_Y + H * 0.115;
-    this.add.text(W * 0.07, arrowY, '<--', { fontFamily: FONT, fontSize: fs(0.040), color: '#1e2236' }).setOrigin(0.5).setDepth(3);
-    this.add.text(W * 0.93, arrowY, '-->', { fontFamily: FONT, fontSize: fs(0.040), color: '#1e2236' }).setOrigin(0.5).setDepth(3);
+    const arrowY = this.CARD_Y + H * 0.135;
+    this.add.text(W * 0.07, arrowY, '<--', { fontFamily: FONT, fontSize: fs(0.034), color: '#1e2236' }).setOrigin(0.5).setDepth(3);
+    this.add.text(W * 0.93, arrowY, '-->', { fontFamily: FONT, fontSize: fs(0.034), color: '#1e2236' }).setOrigin(0.5).setDepth(3);
 
     // ── Left / Right buttons — each 44% wide, centered in their zone ──────
     const BTN_W = W * 0.44;
@@ -401,8 +402,8 @@ export class SortingGameScene extends BaseGameScene {
     const W    = this.W, H = this.H;
     const FONT = "'Space Grotesk', sans-serif";
     const fs   = (f: number) => `${Math.round(H * f)}px`;
-    const CW   = Math.min(W * 0.64, 520);
-    const CH   = Math.min(H * 0.44, 340);
+    const CW   = Math.min(W * 0.86, 520);
+    const CH   = Math.min(H * 0.54, 400);
 
     const intro = this.add.container(W / 2, H * 0.47).setDepth(60);
 

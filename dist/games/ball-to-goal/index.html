@@ -2,27 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Ball to Goal — MiniGames</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; height: 100dvh; }
     body {
       background: #070810;
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
+      margin: 0; padding: 0;
+      width: 100vw; width: 100dvw;
+      height: 100vh; height: 100dvh;
       overflow: hidden;
+      overscroll-behavior: none;
+      touch-action: none;
     }
-    canvas { display: block; }
+    canvas { display: block; touch-action: none; }
   </style>
-  <script type="module" crossorigin src="/assets/ballToGoal-CNXwR3L1.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="modulepreload" crossorigin href="/assets/BaseGameScene-ClasZfdZ.js">
-  <link rel="modulepreload" crossorigin href="/assets/CoordinateSystem-Ch4kOPdn.js">
+  <script type="module" crossorigin src="/MiniGames/assets/ballToGoal-l2GtpM0c.js"></script>
+  <link rel="modulepreload" crossorigin href="/MiniGames/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/MiniGames/assets/BaseGameScene-I1umCFfR.js">
+  <link rel="modulepreload" crossorigin href="/MiniGames/assets/CoordinateSystem-Ch4kOPdn.js">
 </head>
 <body>
 </body>

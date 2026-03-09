@@ -91,23 +91,23 @@ export class StackTheOrderScene extends BaseGameScene {
     this.H = this.scale.height;
 
     // HUD band at the top contains question text; hook lives below it
-    this.HUD_H     = Math.round(this.H * 0.145);
+    this.HUD_H     = Math.round(this.H * 0.165);
     this.BLOCK_W   = Math.round(this.W * 0.155);
     // On portrait mobile, H >> W so 0.083*H makes very tall blocks.
     // Cap BLOCK_H at BLOCK_W*1.1 so blocks stay roughly square on all screens.
     this.BLOCK_H   = Math.min(Math.round(this.H * 0.083), Math.round(this.BLOCK_W * 1.1));
     this.BLOCK_GAP = Math.max(3, Math.round(this.H * 0.006));
     this.GROUND_Y  = Math.round(this.H * 0.820);
-    this.SEL_Y     = Math.round(this.H * 0.912);
-    this.SEL_Y2    = Math.round(this.H * 0.956);
+    this.SEL_Y     = Math.round(this.H * 0.892);
+    this.SEL_Y2    = Math.round(this.H * 0.940);
     this.SEL_GAP   = Math.round(this.W * 0.013);
     this.HOOK_MIN_X = Math.round(this.W * 0.13);
     this.HOOK_MAX_X = Math.round(this.W * 0.87);
     this.CEIL_Y    = this.HUD_H;
     this.CEIL_THICK = Math.max(2, Math.round(this.H * 0.010));
     this.ROD_LEN   = Math.round(this.H * 0.090);
-    this.BODY_H    = Math.round(this.H * 0.038);
-    this.BODY_W    = Math.round(this.W * 0.058);
+    this.BODY_H    = Math.round(this.H * 0.052);
+    this.BODY_W    = Math.round(this.W * 0.100);
 
     // Block centre in world-Y while hanging from hook
     this.HOOK_GRAB_Y =
@@ -299,10 +299,10 @@ export class StackTheOrderScene extends BaseGameScene {
     ).setOrigin(0.5));
 
     // Question text — fits within HUD band, above the ceiling bar
-    this.tr(this.add.text(W / 2, Math.round(H * 0.086),
+    this.tr(this.add.text(W / 2, Math.round(H * 0.082),
       this.currentLevel.question, {
         fontFamily: 'Space Grotesk, sans-serif',
-        fontSize: `${Math.round(H * 0.030)}px`,
+        fontSize: `${Math.round(H * 0.026)}px`,
         color: COL_TEXT,
         wordWrap: { width: W * 0.78 },
         align: 'center',

@@ -4,9 +4,8 @@ import type { BalancingGameConfig, BalancingLevel, EquationTerm } from './types'
 
 // ─── Layout — all dynamic so the game scales to any screen ────────────────────
 
-const dpr     = window.devicePixelRatio || 1;
-const W       = Math.min(Math.round(window.innerWidth * dpr), Math.round(window.innerHeight * dpr * (4 / 3)));
-const H       = Math.round(window.innerHeight * dpr);
+const H       = window.innerHeight;
+const W       = Math.min(window.innerWidth, Math.round(H * (4 / 3)));
 
 const HUD_H        = Math.round(H * 0.065);
 const PIVOT_Y      = Math.round(H * 0.62);
@@ -457,11 +456,13 @@ export class BalancingGameScene extends BaseGameScene {
         this.onCorrect(W / 2, BEAM_Y);
         this.scoreText.setText(`${this.score.correct} correct`);
 
-        const msg = this.track(this.add.text(W / 2, BEAM_Y - 50, '⚖ Balanced!', {
-          fontSize: `${Math.round(H * 0.032)}px`, fontStyle: 'bold', color: '#10b981',
+        const msgY = Math.round(H * 0.36);
+        const msg = this.track(this.add.text(W / 2, msgY + 20, '⚖ Balanced!', {
+          fontSize: `${Math.round(H * 0.038)}px`, fontStyle: 'bold', color: '#10b981',
           fontFamily: 'Space Grotesk, sans-serif',
+          stroke: '#000000', strokeThickness: 4,
         }).setOrigin(0.5).setDepth(50).setAlpha(0));
-        this.tweens.add({ targets: msg, alpha: 1, y: BEAM_Y - 70, duration: 350, ease: 'Quad.Out' });
+        this.tweens.add({ targets: msg, alpha: 1, y: msgY, duration: 350, ease: 'Quad.Out' });
 
         this.time.delayedCall(1400, () => this.loadLevel(this.currentLevelIndex + 1));
       },
@@ -474,18 +475,20 @@ export class BalancingGameScene extends BaseGameScene {
     const dir = L >= R ? 1 : -1;
 
     this.tweens.add({
-      targets: this.seesawContainer, rotation: dir * 0.48, duration: 480, ease: 'Cubic.In',
+      targets: this.seesawContainer, rotation: dir * 0.72, duration: 520, ease: 'Cubic.In',
       onComplete: () => {
         this.audio.playDrop();
         this.cameras.main.shake(350, 0.012);
         this.onWrong(W / 2, BEAM_Y);
 
         const hint = L > R ? 'Left side is too heavy' : 'Right side is too heavy';
-        const hintText = this.track(this.add.text(W / 2, BEAM_Y - 40, hint, {
-          fontSize: `${Math.round(H * 0.022)}px`, fontStyle: 'bold', color: '#ef4444',
+        const hintY = Math.round(H * 0.38);
+        const hintText = this.track(this.add.text(W / 2, hintY + 16, hint, {
+          fontSize: `${Math.round(H * 0.026)}px`, fontStyle: 'bold', color: '#ef4444',
           fontFamily: 'Space Grotesk, sans-serif',
+          stroke: '#000000', strokeThickness: 3,
         }).setOrigin(0.5).setDepth(50).setAlpha(0));
-        this.tweens.add({ targets: hintText, alpha: 1, y: BEAM_Y - 58, duration: 320, ease: 'Quad.Out' });
+        this.tweens.add({ targets: hintText, alpha: 1, y: hintY, duration: 320, ease: 'Quad.Out' });
 
         this.time.delayedCall(600, () => this.showRetryButton());
       },
