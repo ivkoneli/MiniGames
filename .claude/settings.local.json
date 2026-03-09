@@ -13,7 +13,9 @@
       "Bash(curl -s \"https://haptics.lochie.me/assets/index-CjA15UBB.js\")",
       "Bash(python3 -c \"import sys; d=sys.stdin.read\\(\\); idx=d.find\\(''Haptics''\\); print\\(d[idx:idx+500] if idx>=0 else ''NOT FOUND''\\)\")",
       "Bash(node -e \":*)",
-      "Bash(grep -l \"haptics\\\\|Haptics\" games/*/index.html)"
+      "Bash(grep -l \"haptics\\\\|Haptics\" games/*/index.html)",
+      "WebFetch(domain:unpkg.com)",
+      "WebFetch(domain:cdn.jsdelivr.net)"
     ]
   }
 }

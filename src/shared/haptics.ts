@@ -1,12 +1,15 @@
-// Haptic feedback wrapper — no-ops gracefully if library unavailable
-declare const Haptics: any;
+// Haptic feedback via Web Vibration API.
+// Works on Android Chrome/Firefox. No-ops silently on iOS Safari (Apple doesn't implement it).
+const vib = (pattern: number | number[]) => {
+  try { navigator.vibrate?.(pattern); } catch {}
+};
 
 export const haptics = {
-  light:   () => { try { Haptics?.impact?.({ style: 'light'   }); } catch {} },
-  medium:  () => { try { Haptics?.impact?.({ style: 'medium'  }); } catch {} },
-  heavy:   () => { try { Haptics?.impact?.({ style: 'heavy'   }); } catch {} },
-  success: () => { try { Haptics?.notification?.({ type: 'success' }); } catch {} },
-  warning: () => { try { Haptics?.notification?.({ type: 'warning' }); } catch {} },
-  error:   () => { try { Haptics?.notification?.({ type: 'error'   }); } catch {} },
-  select:  () => { try { Haptics?.selection?.(); } catch {} },
+  light:   () => vib(10),
+  medium:  () => vib(25),
+  heavy:   () => vib(50),
+  success: () => vib([10, 30, 10]),
+  warning: () => vib([30, 10, 30]),
+  error:   () => vib([50, 10, 50]),
+  select:  () => vib(5),
 };
