@@ -7,6 +7,7 @@ import {
   playBuzzer,
   playCountdownTick,
 } from './SoundGenerator';
+import { haptics } from '../../shared/haptics';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -114,8 +115,8 @@ export class SortingGameScene extends BaseGameScene {
     const FONT = "'Space Grotesk', sans-serif";
     const fs   = (f: number) => `${Math.round(H * f)}px`;
 
-    this.CARD_W = Math.min(W * 0.38, 300);
-    this.CARD_H = Math.min(H * 0.27, 210);
+    this.CARD_W = Math.round(W * 0.38);
+    this.CARD_H = Math.round(H * 0.27);
     this.CARD_X = W / 2;
     this.CARD_Y = H * 0.465;
 
@@ -135,7 +136,7 @@ export class SortingGameScene extends BaseGameScene {
       .setAlpha(0);
 
     // ── Clock icon (left of score) ─────────────────────────────────────────
-    this.clockRadius = Math.min(Math.round(HUD_H * 0.40), 30);
+    this.clockRadius = Math.round(HUD_H * 0.40);
     this.clockContainer = this.add.container(W * 0.28, HUD_H / 2).setDepth(20);
     this.clockFaceGfx   = this.add.graphics();
     this.clockHandGfx   = this.add.graphics();
@@ -197,7 +198,7 @@ export class SortingGameScene extends BaseGameScene {
 
     // ── Left / Right buttons — each 44% wide, centered in their zone ──────
     const BTN_W = W * 0.44;
-    const BTN_H = Math.min(H * 0.090, 70);
+    const BTN_H = Math.round(H * 0.090);
     const BTN_Y = H * 0.880;
 
     this.leftBtnBg = this.add.rectangle(W * 0.25, BTN_Y, BTN_W, BTN_H, 0x0d0f1e)
@@ -208,6 +209,7 @@ export class SortingGameScene extends BaseGameScene {
     this.leftBtnBg
       .on('pointerdown', () => {
         if (!this.handleChoice('left')) return;
+        haptics.light();
         this.tweens.add({ targets: [this.leftBtnBg, this.leftBtnLbl], scaleX: 0.92, scaleY: 0.92, duration: 75 });
       })
       .on('pointerup', () => {
@@ -222,6 +224,7 @@ export class SortingGameScene extends BaseGameScene {
     this.rightBtnBg
       .on('pointerdown', () => {
         if (!this.handleChoice('right')) return;
+        haptics.light();
         this.tweens.add({ targets: [this.rightBtnBg, this.rightBtnLbl], scaleX: 0.92, scaleY: 0.92, duration: 75 });
       })
       .on('pointerup', () => {
@@ -402,8 +405,8 @@ export class SortingGameScene extends BaseGameScene {
     const W    = this.W, H = this.H;
     const FONT = "'Space Grotesk', sans-serif";
     const fs   = (f: number) => `${Math.round(H * f)}px`;
-    const CW   = Math.min(W * 0.86, 520);
-    const CH   = Math.min(H * 0.54, 400);
+    const CW   = Math.round(W * 0.82);
+    const CH   = Math.round(H * 0.54);
 
     const intro = this.add.container(W / 2, H * 0.47).setDepth(60);
 
@@ -445,8 +448,8 @@ export class SortingGameScene extends BaseGameScene {
     }).setOrigin(0.5);
 
     // Ready button
-    const btnW = Math.min(CW * 0.44, 210);
-    const btnH = Math.min(CH * 0.17, 52);
+    const btnW = Math.round(CW * 0.44);
+    const btnH = Math.round(CH * 0.17);
     const btnY = CH * 0.375;
     let readyLocked = false;
 
@@ -465,6 +468,7 @@ export class SortingGameScene extends BaseGameScene {
       .on('pointerdown', () => {
         if (readyLocked) return;
         readyLocked = true;
+        haptics.light();
         this.audio.playClick();
         this.tweens.add({ targets: [readyBg, readyLbl], scaleX: 0.92, scaleY: 0.92, duration: 80 });
         this.time.delayedCall(110, () => {
@@ -620,6 +624,7 @@ export class SortingGameScene extends BaseGameScene {
       if (isCorrect) {
         this.streak++;
         this.bestStreak = Math.max(this.bestStreak, this.streak);
+        haptics.success();
         this.onCorrect(this.CARD_X, this.CARD_Y);
         // Override the fixed-rate correct sound with streak-pitched version
         if (this.cache.audio.exists('sfx-correct')) {
@@ -635,6 +640,7 @@ export class SortingGameScene extends BaseGameScene {
         if (this.streak >= 3) this.showStreakBurst();
       } else {
         this.streak = 0;
+        haptics.error();
         this.onWrong(this.CARD_X, this.CARD_Y);
         this.flashZone(direction === 'left', false);
       }

@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { BaseGameScene } from '../../shared/BaseGameScene';
 import { CoordinateSystem } from '../../shared/CoordinateSystem';
 import type { BallToGoalConfig, BallToGoalLevel, BallState } from './types';
+import { haptics } from '../../shared/haptics';
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
 // Caps at 4:3 so the game is centred and ~70-75% wide on large monitors.
@@ -10,28 +11,28 @@ import type { BallToGoalConfig, BallToGoalLevel, BallState } from './types';
 const _dpr     = window.devicePixelRatio || 1;
 const H        = Math.round((window.visualViewport?.height ?? window.innerHeight) * _dpr);
 const W        = Math.min(Math.round((window.visualViewport?.width ?? window.innerWidth) * _dpr), Math.round(H * (4 / 3)));
-const HUD_H    = 52;
-const PROMPT_H = 52;
-const GX       = 16;
+const HUD_H    = Math.round(H * 0.030);
+const PROMPT_H = Math.round(H * 0.030);
+const GX       = Math.round(W * 0.014);
 const GY       = HUD_H + PROMPT_H;
-const GPAD     = 36;
-const BTN_GAP  = 10;
+const GPAD     = Math.round(W * 0.030);
+const BTN_GAP  = Math.round(W * 0.012);
 
 const IS_NARROW = W < 900;
 
-// Narrow: full-width graph on top (~55%), 2×2 button grid below
+// Narrow: full-width graph on top (60%), 2×2 button grid below
 // Wide:   graph on left, vertical button sidebar on right
 const GW = IS_NARROW ? W - GX * 2 : W - 240;
 const GH = IS_NARROW
-  ? Math.round((H - GY - 12) * 0.55)
-  : H - GY - 12;
+  ? Math.round((H - GY - Math.round(H * 0.005)) * 0.60)
+  : H - GY - Math.round(H * 0.005);
 
 const BTN_W = IS_NARROW
   ? Math.round((GW - BTN_GAP) / 2)
   : W - (GX + GW + 12) - 12;
 const BTN_H = IS_NARROW
-  ? Math.min(100, Math.round((H - GY - GH - 28 - BTN_GAP) / 2))
-  : Math.min(115, Math.max(80, Math.round(GH * 0.23)));
+  ? Math.round((H - GY - GH - Math.round(H * 0.015) - BTN_GAP) / 2)
+  : Math.max(Math.round(H * 0.080), Math.round(GH * 0.23));
 const BTN_X = GX + GW + 12; // only meaningful in wide mode
 
 const SLOT_COLORS = [0x7c3aed, 0x2563eb, 0x10b981, 0xf59e0b];
@@ -96,20 +97,22 @@ export class BallToGoalScene extends BaseGameScene {
   // ─── BaseGameScene hooks ───────────────────────────────────────
 
   protected setupUI(): void {
+    const fs13 = `${Math.round(H * 0.013)}px`;
+    const hudY  = Math.round(HUD_H * 0.5);
     this.add
-      .text(14, 16, '← Menu', { fontSize: '13px', color: '#475569', fontFamily: 'Space Grotesk, sans-serif' })
-      .setDepth(10).setInteractive({ useHandCursor: true })
+      .text(Math.round(W * 0.014), hudY, '← Menu', { fontSize: fs13, color: '#475569', fontFamily: 'Space Grotesk, sans-serif' })
+      .setOrigin(0, 0.5).setDepth(10).setInteractive({ useHandCursor: true })
       .on('pointerover', function (this: Phaser.GameObjects.Text) { this.setColor('#94a3b8'); })
       .on('pointerout',  function (this: Phaser.GameObjects.Text) { this.setColor('#475569'); })
       .on('pointerdown', () => { window.location.href = import.meta.env.BASE_URL; });
 
     this.levelText = this.add
-      .text(W / 2, 16, '', { fontSize: '13px', color: '#64748b', fontFamily: 'Space Grotesk, sans-serif', align: 'center' })
-      .setOrigin(0.5, 0).setDepth(10);
+      .text(W / 2, hudY, '', { fontSize: fs13, color: '#64748b', fontFamily: 'Space Grotesk, sans-serif', align: 'center' })
+      .setOrigin(0.5, 0.5).setDepth(10);
 
     this.scoreText = this.add
-      .text(W - 14, 16, '0 correct', { fontSize: '13px', color: '#64748b', fontFamily: 'Space Grotesk, sans-serif' })
-      .setOrigin(1, 0).setDepth(10);
+      .text(W - Math.round(W * 0.014), hudY, '0 correct', { fontSize: fs13, color: '#64748b', fontFamily: 'Space Grotesk, sans-serif' })
+      .setOrigin(1, 0.5).setDepth(10);
 
     this.add.rectangle(W / 2, HUD_H - 1, W, 1, 0xffffff, 0.06).setDepth(10);
   }
@@ -153,14 +156,15 @@ export class BallToGoalScene extends BaseGameScene {
     });
 
     // ── Description ──
+    const descY = HUD_H + Math.round(H * 0.004);
     if (level.description) {
       const prompt = this.track(
-        this.add.text(W / 2, HUD_H + 14, level.description, {
-          fontSize: '19px', fontStyle: 'bold', color: '#e2e8f0',
-          fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - 48 },
+        this.add.text(W / 2, descY, level.description, {
+          fontSize: `${Math.round(H * 0.017)}px`, fontStyle: 'bold', color: '#e2e8f0',
+          fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - Math.round(W * 0.04) },
         }).setOrigin(0.5, 0).setAlpha(0),
       );
-      this.tweens.add({ targets: prompt, alpha: 1, y: { from: HUD_H + 6, to: HUD_H + 14 }, duration: 280, ease: 'Quad.Out' });
+      this.tweens.add({ targets: prompt, alpha: 1, y: { from: HUD_H, to: descY }, duration: 280, ease: 'Quad.Out' });
     }
 
     // ── Graph background ──
@@ -185,15 +189,20 @@ export class BallToGoalScene extends BaseGameScene {
     this.highlightGfx = this.track(this.add.graphics().setDepth(5));
 
     // ── Goal ──
+    const dotR   = Math.round(H * 0.007);
+    const glowR  = Math.round(H * 0.014);
+    const labelOffY = Math.round(H * 0.022);
+    const lblFs  = `${Math.round(H * 0.010)}px`;
+
     const gs = this.coord.mathToScreen(level.goalPos[0], level.goalPos[1]);
     const goalRing = this.track(
-      this.add.arc(gs.x, gs.y, 20, 0, 360, false, GOAL_COLOR, 0)
+      this.add.arc(gs.x, gs.y, Math.round(H * 0.020), 0, 360, false, GOAL_COLOR, 0)
         .setStrokeStyle(2, GOAL_COLOR, 0.6).setDepth(6).setAlpha(0),
     );
-    const goalDot   = this.track(this.add.arc(gs.x, gs.y, 7, 0, 360, false, GOAL_COLOR, 1).setDepth(6).setAlpha(0));
+    const goalDot   = this.track(this.add.arc(gs.x, gs.y, dotR, 0, 360, false, GOAL_COLOR, 1).setDepth(6).setAlpha(0));
     const goalLabel = this.track(
-      this.add.text(gs.x, gs.y - 28, 'GOAL', {
-        fontSize: '10px', fontStyle: 'bold',
+      this.add.text(gs.x, gs.y - labelOffY, 'GOAL', {
+        fontSize: lblFs, fontStyle: 'bold',
         color: `#${GOAL_COLOR.toString(16)}`,
         fontFamily: 'Space Grotesk, sans-serif',
       }).setOrigin(0.5).setDepth(6).setAlpha(0),
@@ -201,12 +210,12 @@ export class BallToGoalScene extends BaseGameScene {
 
     // ── Ball visuals (persistent within level, reset on retry) ──
     const bs = this.coord.mathToScreen(level.startPos[0], level.startPos[1]);
-    this.ballGlow     = this.track(this.add.arc(bs.x, bs.y, 14, 0, 360, false, BALL_COLOR, 0.2).setDepth(8).setAlpha(0));
-    this.ballArc      = this.track(this.add.arc(bs.x, bs.y,  7, 0, 360, false, BALL_COLOR, 1.0).setDepth(9).setAlpha(0));
+    this.ballGlow     = this.track(this.add.arc(bs.x, bs.y, glowR, 0, 360, false, BALL_COLOR, 0.2).setDepth(8).setAlpha(0));
+    this.ballArc      = this.track(this.add.arc(bs.x, bs.y, dotR, 0, 360, false, BALL_COLOR, 1.0).setDepth(9).setAlpha(0));
 
     const startLabel = this.track(
-      this.add.text(bs.x, bs.y - 22, 'START', {
-        fontSize: '10px', fontStyle: 'bold',
+      this.add.text(bs.x, bs.y - labelOffY, 'START', {
+        fontSize: lblFs, fontStyle: 'bold',
         color: `#${BALL_COLOR.toString(16).padStart(6, '0')}`,
         fontFamily: 'Space Grotesk, sans-serif',
       }).setOrigin(0.5).setDepth(9).setAlpha(0),
@@ -239,9 +248,15 @@ export class BallToGoalScene extends BaseGameScene {
 
   private buildButtons(level: BallToGoalLevel): void {
     // Wide: vertical sidebar. Narrow: 2×2 grid below graph.
-    const gridY  = GY + GH + 10; // y of the 2×2 area (narrow only)
+    const gridY  = GY + GH + Math.round(H * 0.010); // y of the 2×2 area (narrow only)
     const totalH = level.options.length * BTN_H + (level.options.length - 1) * BTN_GAP;
     const sideStartY = GY + (GH - totalH) / 2; // centred vertically in sidebar (wide only)
+    const fs16 = `${Math.round(H * 0.017)}px`;
+    const fs13 = `${Math.round(H * 0.013)}px`;
+    const stripPad = Math.round(W * 0.003);
+    const letterPadX = Math.round(W * 0.012);
+    const letterPadY = Math.round(BTN_H * 0.22);
+    const eqPadX = Math.round(W * 0.010);
 
     level.options.forEach((eq, i) => {
       const fn    = CoordinateSystem.parseFn(eq.fn);
@@ -268,14 +283,14 @@ export class BallToGoalScene extends BaseGameScene {
       this.buttonBgs.push(bg);
       this.buttonColors.push(color);
 
-      const strip  = this.track(this.add.rectangle(leftX + 3, btnCY, 3, BTN_H - 6, color).setAlpha(0));
-      const letter = this.track(this.add.text(leftX + 14, btnCY - BTN_H / 2 + 14, label, {
-        fontSize: '16px', fontStyle: 'bold', color: `#${color.toString(16).padStart(6, '0')}`,
+      const strip  = this.track(this.add.rectangle(leftX + stripPad, btnCY, Math.round(W * 0.003), BTN_H - Math.round(BTN_H * 0.12), color).setAlpha(0));
+      const letter = this.track(this.add.text(leftX + letterPadX, btnCY - BTN_H / 2 + letterPadY, label, {
+        fontSize: fs16, fontStyle: 'bold', color: `#${color.toString(16).padStart(6, '0')}`,
         fontFamily: 'Space Grotesk, sans-serif',
       }).setAlpha(0));
-      const eqText = this.track(this.add.text(leftX + 12, btnCY + 8, eq.label, {
-        fontSize: '13px', color: '#e2e8f0', fontFamily: 'Space Grotesk, sans-serif',
-        wordWrap: { width: BTN_W - 18 },
+      const eqText = this.track(this.add.text(leftX + eqPadX, btnCY, eq.label, {
+        fontSize: fs13, color: '#e2e8f0', fontFamily: 'Space Grotesk, sans-serif',
+        wordWrap: { width: BTN_W - Math.round(W * 0.015) },
       }).setOrigin(0, 0.5).setAlpha(0));
 
       // Staggered fade-in
@@ -298,6 +313,7 @@ export class BallToGoalScene extends BaseGameScene {
       bg.on('pointerdown', () => {
         if (this.simState !== 'idle') return;
         if (!fn) return;
+        haptics.light();
         this.audio.playClick();
 
         if (required <= 1) {
@@ -380,15 +396,17 @@ export class BallToGoalScene extends BaseGameScene {
     if (this.selectedFnIndices.length < required) return;
 
     const btnCX = GX + GW / 2;
-    const btnCY = IS_NARROW ? GY + GH - 30 : GY + GH - 30;
+    const btnCY = GY + GH - Math.round(H * 0.030);
+    const lbtnW = Math.round(W * 0.155);
+    const lbtnH = Math.round(H * 0.044);
     const lbg = this.track(
-      this.add.rectangle(btnCX, btnCY, 180, 44, 0x111827)
+      this.add.rectangle(btnCX, btnCY, lbtnW, lbtnH, 0x111827)
         .setStrokeStyle(1.5, 0x3b82f6, 0.8).setInteractive({ useHandCursor: true })
         .setDepth(20).setAlpha(0),
     );
     const llbl = this.track(
       this.add.text(btnCX, btnCY, '▶  Launch', {
-        fontSize: '16px', fontStyle: 'bold', color: '#93c5fd',
+        fontSize: `${Math.round(H * 0.017)}px`, fontStyle: 'bold', color: '#93c5fd',
         fontFamily: 'Space Grotesk, sans-serif',
       }).setOrigin(0.5).setDepth(21).setAlpha(0),
     );
@@ -397,6 +415,7 @@ export class BallToGoalScene extends BaseGameScene {
     lbg.on('pointerout',  () => { lbg.setStrokeStyle(1.5, 0x3b82f6, 0.8); llbl.setColor('#93c5fd'); });
     lbg.on('pointerdown', () => {
       if (this.simState !== 'idle') return;
+      haptics.light();
       this.audio.playClick();
       this.launchSimulation();
     });
@@ -549,6 +568,7 @@ export class BallToGoalScene extends BaseGameScene {
     this.tweens.add({ targets: [this.ballArc, this.ballGlow], scaleX: 1.8, scaleY: 1.8, duration: 150, ease: 'Back.Out', yoyo: true });
 
     // onCorrect() shows ✓ overlay and plays the correct sound
+    haptics.success();
     this.onCorrect(gs.x, gs.y);
     this.scoreText.setText(`${this.score.correct} correct`);
     this.cameras.main.flash(180, 16, 185, 129, false);
@@ -574,6 +594,7 @@ export class BallToGoalScene extends BaseGameScene {
 
     // Show ✗ at graph centre — NOT at ball position (which may be off-screen)
     // Note: onWrong() calls audio.playWrong() — do NOT call it separately
+    haptics.error();
     const cx = GX + GW / 2;
     const cy = GY + GH / 2;
     this.onWrong(cx, cy);
@@ -586,14 +607,16 @@ export class BallToGoalScene extends BaseGameScene {
 
   private showRetryButton(): void {
     const btnCX = GX + GW / 2;
-    const btnCY = GY + GH / 2 + 60;
+    const btnCY = GY + GH / 2 + Math.round(H * 0.060);
+    const retryW = Math.round(W * 0.138);
+    const retryH = Math.round(H * 0.044);
 
-    const bg = this.add.rectangle(btnCX, btnCY, 160, 44, 0x0c0d1a)
+    const bg = this.add.rectangle(btnCX, btnCY, retryW, retryH, 0x0c0d1a)
       .setStrokeStyle(1, 0xef4444, 0.5).setDepth(20).setAlpha(0)
       .setInteractive({ useHandCursor: true });
 
     const label = this.add.text(btnCX, btnCY, 'Try Again →', {
-      fontSize: '14px', fontStyle: 'bold', color: '#ef4444',
+      fontSize: `${Math.round(H * 0.014)}px`, fontStyle: 'bold', color: '#ef4444',
       fontFamily: 'Space Grotesk, sans-serif',
     }).setOrigin(0.5).setDepth(21).setAlpha(0);
 
@@ -643,27 +666,31 @@ export class BallToGoalScene extends BaseGameScene {
     const overlay = this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0).setDepth(100);
     this.tweens.add({ targets: overlay, alpha: 0.72, duration: 320 });
 
-    const card = this.add.rectangle(W / 2, H / 2, 440, 310, 0x0d0f1e)
+    const cardW = Math.round(W * 0.78);
+    const cardH = Math.round(H * 0.52);
+    const card = this.add.rectangle(W / 2, H / 2, cardW, cardH, 0x0d0f1e)
       .setStrokeStyle(1, 0xffffff, 0.1).setDepth(101).setScale(0.82).setAlpha(0);
     this.tweens.add({ targets: card, scaleX: 1, scaleY: 1, alpha: 1, duration: 340, delay: 100, ease: 'Back.Out' });
 
     const ts = (sz: string, c: string) => ({ fontSize: sz, color: c, fontFamily: 'Space Grotesk, sans-serif' });
     const els = [
-      this.add.text(W/2, H/2-100, emoji,                         { fontSize: '52px' }).setOrigin(0.5).setDepth(102),
-      this.add.text(W/2, H/2-48,  'Complete!',                   ts('26px', '#e2e8f0')).setOrigin(0.5).setDepth(102),
-      this.add.text(W/2, H/2+4,   `${s.correct} / ${total} levels cleared`, ts('16px', '#94a3b8')).setOrigin(0.5).setDepth(102),
-      this.add.text(W/2, H/2+42,  `${pct}%`,  ts('22px', pct >= 80 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#ef4444')).setOrigin(0.5).setDepth(102),
+      this.add.text(W/2, H/2 - H*0.16, emoji,  { fontSize: `${Math.round(H * 0.052)}px` }).setOrigin(0.5).setDepth(102),
+      this.add.text(W/2, H/2 - H*0.08, 'Complete!', ts(`${Math.round(H * 0.026)}px`, '#e2e8f0')).setOrigin(0.5).setDepth(102),
+      this.add.text(W/2, H/2 + H*0.00, `${s.correct} / ${total} levels cleared`, ts(`${Math.round(H * 0.016)}px`, '#94a3b8')).setOrigin(0.5).setDepth(102),
+      this.add.text(W/2, H/2 + H*0.07, `${pct}%`, ts(`${Math.round(H * 0.022)}px`, pct >= 80 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#ef4444')).setOrigin(0.5).setDepth(102),
     ];
     els.forEach(el => el.setAlpha(0));
     this.tweens.add({ targets: els, alpha: 1, duration: 280, delay: 280 });
 
-    const again = this.add.text(W/2-80, H/2+100, 'Play Again', ts('15px', '#a78bfa'))
+    const btnOffX = W * 0.13;
+    const btnY    = H / 2 + H * 0.18;
+    const again = this.add.text(W/2 - btnOffX, btnY, 'Play Again', ts(`${Math.round(H * 0.015)}px`, '#a78bfa'))
       .setOrigin(0.5).setDepth(102).setAlpha(0).setInteractive({ useHandCursor: true })
       .on('pointerover', function (this: Phaser.GameObjects.Text) { this.setColor('#c4b5fd'); })
       .on('pointerout',  function (this: Phaser.GameObjects.Text) { this.setColor('#a78bfa'); })
       .on('pointerdown', () => { this.scene.restart(); });
 
-    const menu = this.add.text(W/2+80, H/2+100, '← Menu', ts('15px', '#475569'))
+    const menu = this.add.text(W/2 + btnOffX, btnY, '← Menu', ts(`${Math.round(H * 0.015)}px`, '#475569'))
       .setOrigin(0.5).setDepth(102).setAlpha(0).setInteractive({ useHandCursor: true })
       .on('pointerover', function (this: Phaser.GameObjects.Text) { this.setColor('#94a3b8'); })
       .on('pointerout',  function (this: Phaser.GameObjects.Text) { this.setColor('#475569'); })

@@ -5,6 +5,7 @@ import {
   playCountdownBeep,
   playGoBeep,
 } from '../SortingGame/SoundGenerator';
+import { haptics } from '../../shared/haptics';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -142,8 +143,8 @@ export class MemoryGameScene extends BaseGameScene {
     const W    = this.W, H = this.H;
     const FONT = "'Space Grotesk', sans-serif";
     const fs   = (f: number) => `${Math.round(H * f)}px`;
-    const CW   = Math.min(W * 0.86, 520);
-    const CH   = Math.min(H * 0.54, 400);
+    const CW   = Math.round(W * 0.82);
+    const CH   = Math.round(H * 0.54);
     const col  = hexStr(level.color);
 
     const intro = this.add.container(W / 2, H * 0.47).setDepth(60);
@@ -189,8 +190,8 @@ export class MemoryGameScene extends BaseGameScene {
     }).setOrigin(0.5);
 
     // Ready button
-    const btnW = Math.min(CW * 0.44, 210);
-    const btnH = Math.min(CH * 0.17, 52);
+    const btnW = Math.round(CW * 0.44);
+    const btnH = Math.round(CH * 0.17);
     const btnY = CH * 0.375;
     let readyLocked = false;
 
@@ -209,6 +210,7 @@ export class MemoryGameScene extends BaseGameScene {
       .on('pointerdown', () => {
         if (readyLocked) return;
         readyLocked = true;
+        haptics.light();
         this.audio.playClick();
         this.tweens.add({ targets: [readyBg, readyLbl], scaleX: 0.92, scaleY: 0.92, duration: 80 });
         this.time.delayedCall(110, () => {
@@ -288,15 +290,12 @@ export class MemoryGameScene extends BaseGameScene {
     const cols    = level.gridCols;
     const rows    = level.gridRows;
     const GAP     = Math.max(Math.round(W * 0.016), 8);
-    const GRID_L  = W * 0.03;
-    const GRID_R  = W * 0.97;
-    const GRID_T  = this.HUD_H + H * 0.030;
-    const GRID_B  = H * 0.97;
-    const availW  = GRID_R - GRID_L;
-    const availH  = GRID_B - GRID_T;
+    const GRID_T  = this.HUD_H + Math.round(H * 0.030);
+    const availW  = W - Math.round(H * 0.04);
+    const availH  = H - GRID_T - Math.round(H * 0.02);
 
-    let CARD_W = (availW - GAP * (cols - 1)) / cols;
-    let CARD_H = (availH - GAP * (rows - 1)) / rows;
+    let CARD_W = Math.floor((availW - GAP * (cols - 1)) / cols);
+    let CARD_H = Math.floor((availH - GAP * (rows - 1)) / rows);
     // Cap aspect ratio — cards stay portrait-ish
     CARD_H = Math.min(CARD_H, CARD_W * 1.55);
     CARD_W = Math.min(CARD_W, CARD_H * 0.80);
@@ -467,6 +466,7 @@ export class MemoryGameScene extends BaseGameScene {
 
       if (first.pairId === card.pairId) {
         // ── MATCH ──────────────────────────────────────────────────────────
+        haptics.success();
         this.onCorrect(card.baseX, card.baseY);
         this.time.delayedCall(80, () => {
           this.markMatched(first, card);
@@ -481,6 +481,7 @@ export class MemoryGameScene extends BaseGameScene {
         });
       } else {
         // ── MISMATCH ────────────────────────────────────────────────────────
+        haptics.error();
         this.onWrong(card.baseX, card.baseY);
         this.shakePair(first, card);
         this.time.delayedCall(this.MISMATCH_DELAY, () => {
@@ -501,6 +502,7 @@ export class MemoryGameScene extends BaseGameScene {
   private flipUp(card: CardObject, onDone: () => void): void {
     if (card.state !== 'face-down') { onDone(); return; }
     card.state = 'face-up';
+    haptics.light();
     this.audio.playClick();
     this.animateFlip(card, /* toFront */ true, onDone);
   }
@@ -574,6 +576,7 @@ export class MemoryGameScene extends BaseGameScene {
     const mx = (a.baseX + b.baseX) / 2;
     const my = (a.baseY + b.baseY) / 2;
     this.spawnSparkles(mx, my, 0x10b981);
+    haptics.medium();
     this.audio.playDrop();
   }
 

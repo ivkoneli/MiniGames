@@ -144,7 +144,9 @@ export class CoordinateSystem {
       if (!isFinite(y) || isNaN(y) || y < yMin || y > yMax) { penDown = false; continue; }
 
       const sx = mx(x);
-      const sy = my(y);
+      const sy = Math.max(top, Math.min(bottom, my(y)));
+      // Break path if sx is outside horizontal bounds
+      if (sx < left || sx > right) { penDown = false; continue; }
       if (!penDown) { gfx.moveTo(sx, sy); penDown = true; }
       else          { gfx.lineTo(sx, sy); }
     }

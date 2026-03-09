@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { BaseGameScene } from '../../shared/BaseGameScene';
 import type { StackOrderConfig, StackOrderLevel, StackOrderItem } from './types';
+import { haptics } from '../../shared/haptics';
 
 // ─── Colors ───────────────────────────────────────────────────────────────────
 const COL_BLOCK_FILL   = 0x130d2f;
@@ -403,6 +404,7 @@ export class StackTheOrderScene extends BaseGameScene {
 
   private onBlockClicked(entry: SelectionEntry): void {
     this.isAnimating = true;
+    haptics.light();
     this.audio.playClick();
 
     // Dim all other entries while this block is in transit
@@ -480,6 +482,7 @@ export class StackTheOrderScene extends BaseGameScene {
       scaleY: { from: 0.70, to: 1 },
       duration: 300, ease: 'Back.Out',
     });
+    haptics.medium();
     this.audio.playPlace();
 
     // Block is now placed — disable interaction permanently
@@ -610,6 +613,7 @@ export class StackTheOrderScene extends BaseGameScene {
     }
 
     this.cameras.main.flash(200, 16, 185, 129, false);
+    haptics.success();
     this.onCorrect(W / 2, GROUND_Y);
 
     const msg = this.tr(this.add.text(
@@ -648,6 +652,7 @@ export class StackTheOrderScene extends BaseGameScene {
       this.drawBlock(cont.getAt(0) as Phaser.GameObjects.Graphics,
         BLOCK_W, BLOCK_H, 6, 0x1f0a0a, COL_FAIL_STROKE, 2);
     }
+    haptics.error();
     this.onWrong(W / 2, GROUND_Y);   // wrong.mp3 + score recorded immediately
 
     // ── Pre-compute non-overlapping landing positions ────────────────────────
@@ -717,6 +722,7 @@ export class StackTheOrderScene extends BaseGameScene {
         targets: cont, y: landY[i],
         duration: yDur, delay, ease: 'Quad.In',
         onComplete: () => {
+          haptics.medium();
           this.audio.playCollide();
 
           if (isTop && doRico) {
@@ -809,7 +815,7 @@ export class StackTheOrderScene extends BaseGameScene {
 
     const { W, H } = this;
     const cy   = Math.round(H * 0.578);
-    const btnW = Math.round(W * 0.230);
+    const btnW = Math.round(W * 0.420);
     const btnH = Math.round(H * 0.072);
     const fs   = Math.round(H * 0.030);
 
@@ -827,6 +833,7 @@ export class StackTheOrderScene extends BaseGameScene {
     zone.on('pointerover', () => this.drawBtn(btnGfx, W / 2, cy, btnW, btnH, 0x3d3580, COL_HOVER_STROKE));
     zone.on('pointerout',  () => this.drawBtn(btnGfx, W / 2, cy, btnW, btnH, 0x2d2b55, COL_BLOCK_STROKE));
     zone.on('pointerdown', () => {
+      haptics.light();
       this.audio.playClick();
       this.loadLevel(this.sessionIndex);   // same level, no extra penalty
     });

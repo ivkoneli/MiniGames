@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { BaseGameScene } from '../../shared/BaseGameScene';
 import type { BalancingGameConfig, BalancingLevel, EquationTerm } from './types';
+import { haptics } from '../../shared/haptics';
 
 // ─── Layout — all dynamic so the game scales to any screen ────────────────────
 
@@ -344,6 +345,7 @@ export class BalancingGameScene extends BaseGameScene {
       const next = Phaser.Math.Clamp(cur + delta, min, max);
       if (next === cur) return;
       this.coefs[side][termIndex] = next;
+      haptics.light();
       this.audio.playClick();
       this.coefTexts[coefIdx].setText(`${next}`);
       this.refreshBeamLabel();
@@ -397,6 +399,7 @@ export class BalancingGameScene extends BaseGameScene {
 
     bg.on('pointerdown', () => {
       if (this.isAnimating) return;
+      haptics.light();
       this.audio.playClick();
       this.runCheckAnimation();
     });
@@ -454,6 +457,7 @@ export class BalancingGameScene extends BaseGameScene {
       targets: this.seesawContainer, rotation: 0, duration: 900, ease: 'Elastic.Out',
       onComplete: () => {
         this.cameras.main.flash(200, 16, 185, 129, false);
+        haptics.success();
         this.onCorrect(W / 2, BEAM_Y);
         this.scoreText.setText(`${this.score.correct} correct`);
 
@@ -478,6 +482,7 @@ export class BalancingGameScene extends BaseGameScene {
     this.tweens.add({
       targets: this.seesawContainer, rotation: dir * 0.72, duration: 520, ease: 'Cubic.In',
       onComplete: () => {
+        haptics.error();
         this.audio.playDrop();
         this.cameras.main.shake(350, 0.012);
         this.onWrong(W / 2, BEAM_Y);
