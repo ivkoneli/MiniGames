@@ -136,7 +136,7 @@ export class SortingGameScene extends BaseGameScene {
 
     // ── Clock icon (left of score) ─────────────────────────────────────────
     this.clockRadius = Math.min(Math.round(HUD_H * 0.40), 30);
-    this.clockContainer = this.add.container(W * 0.37, HUD_H / 2).setDepth(20);
+    this.clockContainer = this.add.container(W * 0.28, HUD_H / 2).setDepth(20);
     this.clockFaceGfx   = this.add.graphics();
     this.clockHandGfx   = this.add.graphics();
     this.clockNum = this.add.text(0, this.clockRadius * 0.22, '5', {

@@ -12,8 +12,8 @@ class BootScene extends Phaser.Scene {
   create(): void  { this.scene.start(MemoryGameScene.SCENE_KEY, gameConfig); }
 }
 
-const gameH = window.innerHeight;
-const gameW = Math.min(window.innerWidth, Math.round(gameH * (4 / 3)));
+const gameH = window.visualViewport?.height ?? window.innerHeight;
+const gameW = Math.min(window.visualViewport?.width ?? window.innerWidth, Math.round(gameH * (4 / 3)));
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -25,7 +25,11 @@ const game = new Phaser.Game({
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
+    zoom: window.devicePixelRatio || 1,
   },
 });
 
 window.addEventListener('resize', () => game.scale.refresh());
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => game.scale.refresh());
+}

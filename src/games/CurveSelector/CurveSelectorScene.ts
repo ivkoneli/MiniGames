@@ -7,8 +7,8 @@ import type { CurveSelectorConfig, CurveQuestion, CurveDef } from './types';
 // ─── Layout constants ──────────────────────────────────────────────────────────
 // Caps at 4:3 so the game is centred and ~70-75% wide on large monitors.
 
-const W = Math.min(window.innerWidth, Math.round(window.innerHeight * (4 / 3)));
-const H = window.innerHeight;
+const W = Math.min(window.visualViewport?.width ?? window.innerWidth, Math.round((window.visualViewport?.height ?? window.innerHeight) * (4 / 3)));
+const H = window.visualViewport?.height ?? window.innerHeight;
 const HUD_H    = 56;
 const PROMPT_H = 52;
 const MARGIN   = 18;

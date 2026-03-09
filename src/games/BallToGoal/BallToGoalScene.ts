@@ -7,8 +7,8 @@ import type { BallToGoalConfig, BallToGoalLevel, BallState } from './types';
 // Caps at 4:3 so the game is centred and ~70-75% wide on large monitors.
 // Below 900px switches to a narrow (stacked) layout: graph top, 2×2 buttons below.
 
-const W        = Math.min(window.innerWidth, Math.round(window.innerHeight * (4 / 3)));
-const H        = window.innerHeight;
+const W        = Math.min(window.visualViewport?.width ?? window.innerWidth, Math.round((window.visualViewport?.height ?? window.innerHeight) * (4 / 3)));
+const H        = window.visualViewport?.height ?? window.innerHeight;
 const HUD_H    = 52;
 const PROMPT_H = 52;
 const GX       = 16;

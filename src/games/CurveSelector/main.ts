@@ -26,8 +26,8 @@ class BootScene extends Phaser.Scene {
 
 // ─── Phaser game instance ──────────────────────────────────────────────────────
 
-const gameH = window.innerHeight;
-const gameW = Math.min(window.innerWidth, Math.round(gameH * (4 / 3)));
+const gameH = window.visualViewport?.height ?? window.innerHeight;
+const gameW = Math.min(window.visualViewport?.width ?? window.innerWidth, Math.round(gameH * (4 / 3)));
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -39,9 +39,13 @@ const game = new Phaser.Game({
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
+    zoom: window.devicePixelRatio || 1,
   },
 });
 
 // Refresh the Phaser scale manager whenever the browser window is resized.
 // This re-fits the canvas without restarting the scene or resetting the question.
 window.addEventListener('resize', () => game.scale.refresh());
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => game.scale.refresh());
+}

@@ -4,8 +4,8 @@ import type { BalancingGameConfig, BalancingLevel, EquationTerm } from './types'
 
 // ─── Layout — all dynamic so the game scales to any screen ────────────────────
 
-const H       = window.innerHeight;
-const W       = Math.min(window.innerWidth, Math.round(H * (4 / 3)));
+const H       = window.visualViewport?.height ?? window.innerHeight;
+const W       = Math.min(window.visualViewport?.width ?? window.innerWidth, Math.round(H * (4 / 3)));
 
 const HUD_H        = Math.round(H * 0.065);
 const PIVOT_Y      = Math.round(H * 0.62);
@@ -375,9 +375,9 @@ export class BalancingGameScene extends BaseGameScene {
   // ─── Check button ─────────────────────────────────────────────────────────────
 
   private buildCheckButton(): void {
-    const btnY = Math.round(H * 0.918);
-    const btnW = Math.round(W * 0.42);
-    const btnH = Math.round(H * 0.062);
+    const btnY = Math.round(H * 0.800);
+    const btnW = Math.round(W * 0.50);
+    const btnH = Math.round(H * 0.075);
 
     const bg = this.track(
       this.add.rectangle(W / 2, btnY, btnW, btnH, 0x111827)
