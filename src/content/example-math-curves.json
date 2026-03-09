@@ -1,0 +1,73 @@
+{
+  "title": "Identify the Curve",
+  "subject": "Math",
+  "shuffleItems": true,
+  "questions": [
+    {
+      "label": "Which graph shows  f(x) = x²?",
+      "correct":     { "fn": "(x) => x * x" },
+      "distractors": [
+        { "fn": "(x) => x * x * x" },
+        { "fn": "(x) => Math.abs(x)" },
+        { "fn": "(x) => -x * x" }
+      ],
+      "xRange": [-4, 4],
+      "yRange": [-6, 10]
+    },
+    {
+      "label": "Which graph shows  f(x) = sin(x)?",
+      "correct":     { "fn": "(x) => Math.sin(x)" },
+      "distractors": [
+        { "fn": "(x) => Math.cos(x)" },
+        { "fn": "(x) => Math.sin(2 * x)" },
+        { "fn": "(x) => x / Math.PI" }
+      ],
+      "xRange": [-7, 7],
+      "yRange": [-2, 2]
+    },
+    {
+      "label": "Which graph shows  f(x) = |x|?",
+      "correct":     { "fn": "(x) => Math.abs(x)" },
+      "distractors": [
+        { "fn": "(x) => x * x" },
+        { "fn": "(x) => -Math.abs(x)" },
+        { "fn": "(x) => x" }
+      ],
+      "xRange": [-5, 5],
+      "yRange": [-4, 6]
+    },
+    {
+      "label": "Which graph shows  f(x) = √x?",
+      "correct":     { "fn": "(x) => Math.sqrt(x)" },
+      "distractors": [
+        { "fn": "(x) => x * x * 0.25" },
+        { "fn": "(x) => Math.cbrt(x)" },
+        { "fn": "(x) => Math.log(x + 1)" }
+      ],
+      "xRange": [-1, 9],
+      "yRange": [-1, 4]
+    },
+    {
+      "label": "Which graph shows  f(x) = 2ˣ?",
+      "correct":     { "fn": "(x) => Math.pow(2, x)" },
+      "distractors": [
+        { "fn": "(x) => x * x" },
+        { "fn": "(x) => 2 * x" },
+        { "fn": "(x) => Math.log2(x + 4)" }
+      ],
+      "xRange": [-4, 4],
+      "yRange": [-1, 10]
+    },
+    {
+      "label": "Which graph shows  f(x) = 1/x?",
+      "correct":     { "fn": "(x) => 1 / x" },
+      "distractors": [
+        { "fn": "(x) => 1 / (x * x)" },
+        { "fn": "(x) => x" },
+        { "fn": "(x) => Math.sqrt(Math.abs(x))" }
+      ],
+      "xRange": [-6, 6],
+      "yRange": [-5, 5]
+    }
+  ]
+}

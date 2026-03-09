@@ -1,0 +1,10 @@
+Drop your audio files here. Expected filenames:
+
+  correct.mp3   — played when player picks the right answer / ball reaches goal
+  wrong.mp3     — played on a wrong answer / ball misses
+  click.mp3     — played when selecting an equation button
+  win.mp3       — played when all levels are complete (end screen)
+  drop.mp3      — reserved for future use (ball drop moment)
+  tick.mp3      — reserved for future use (timer / countdown)
+
+MP3 format is preferred. Short sound effects work best (0.5s – 2s).

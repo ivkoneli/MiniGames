@@ -1,0 +1,41 @@
+{
+  "game": "DragAndMatch",
+  "title": "Cell Organelles",
+  "subject": "Biology",
+  "shuffleItems": true,
+  "pairsPerRound": 6,
+  "pairs": [
+    {
+      "left":  { "type": "text", "value": "Mitochondria" },
+      "right": { "type": "text", "value": "Produces ATP (energy) for the cell" }
+    },
+    {
+      "left":  { "type": "text", "value": "Nucleus" },
+      "right": { "type": "text", "value": "Contains the cell's DNA and controls gene expression" }
+    },
+    {
+      "left":  { "type": "text", "value": "Ribosome" },
+      "right": { "type": "text", "value": "Synthesises proteins from mRNA" }
+    },
+    {
+      "left":  { "type": "text", "value": "Golgi apparatus" },
+      "right": { "type": "text", "value": "Sorts, modifies, and packages proteins for export" }
+    },
+    {
+      "left":  { "type": "text", "value": "Endoplasmic reticulum" },
+      "right": { "type": "text", "value": "Network of membranes for protein and lipid transport" }
+    },
+    {
+      "left":  { "type": "text", "value": "Lysosome" },
+      "right": { "type": "text", "value": "Breaks down waste materials using digestive enzymes" }
+    },
+    {
+      "left":  { "type": "text", "value": "Cell membrane" },
+      "right": { "type": "text", "value": "Controls what enters and exits the cell" }
+    },
+    {
+      "left":  { "type": "text", "value": "Chloroplast" },
+      "right": { "type": "text", "value": "Site of photosynthesis in plant cells" }
+    }
+  ]
+}

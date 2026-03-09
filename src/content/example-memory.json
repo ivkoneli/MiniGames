@@ -1,0 +1,75 @@
+{
+  "title": "Memory Match",
+  "subject": "Mixed",
+  "shuffleItems": true,
+  "levels": [
+    {
+      "id": "cell-biology",
+      "category": "Biology",
+      "color": "#10b981",
+      "gridCols": 4,
+      "gridRows": 4,
+      "pairs": [
+        { "id": "mito",     "a": "Mitochondria",    "b": "Powerhouse of\nthe cell" },
+        { "id": "nucleus",  "a": "Nucleus",          "b": "Controls cell\nactivities" },
+        { "id": "ribo",     "a": "Ribosome",         "b": "Protein\nsynthesis site" },
+        { "id": "chloro",   "a": "Chloroplast",      "b": "Site of\nphotosynthesis" },
+        { "id": "vacu",     "a": "Vacuole",          "b": "Stores water\n& nutrients" },
+        { "id": "cellwall", "a": "Cell Wall",        "b": "Rigid outer\nplant layer" },
+        { "id": "lyso",     "a": "Lysosome",         "b": "Digests\ncellular waste" },
+        { "id": "er",       "a": "Endoplasmic\nReticulum", "b": "Transport\nnetwork" }
+      ]
+    },
+    {
+      "id": "chemical-elements",
+      "category": "Chemistry",
+      "color": "#6366f1",
+      "gridCols": 4,
+      "gridRows": 4,
+      "pairs": [
+        { "id": "gold",    "a": "Au",   "b": "Gold" },
+        { "id": "silver",  "a": "Ag",   "b": "Silver" },
+        { "id": "iron",    "a": "Fe",   "b": "Iron" },
+        { "id": "copper",  "a": "Cu",   "b": "Copper" },
+        { "id": "lead",    "a": "Pb",   "b": "Lead" },
+        { "id": "tin",     "a": "Sn",   "b": "Tin" },
+        { "id": "mercury", "a": "Hg",   "b": "Mercury" },
+        { "id": "sodium",  "a": "Na",   "b": "Sodium" }
+      ]
+    },
+    {
+      "id": "world-history",
+      "category": "History",
+      "color": "#f59e0b",
+      "gridCols": 4,
+      "gridRows": 4,
+      "pairs": [
+        { "id": "dday",       "a": "D-Day",                    "b": "June 6, 1944" },
+        { "id": "ww1start",   "a": "WWI begins",               "b": "1914" },
+        { "id": "berlin",     "a": "Berlin Wall\nfalls",       "b": "1989" },
+        { "id": "moonlanding","a": "Moon Landing",             "b": "July 20, 1969" },
+        { "id": "magna",      "a": "Magna Carta",              "b": "1215" },
+        { "id": "french",     "a": "French\nRevolution",       "b": "1789" },
+        { "id": "columbus",   "a": "Columbus reaches\nAmerica","b": "1492" },
+        { "id": "hiroshima",  "a": "Hiroshima\natomic bomb",   "b": "August 6, 1945" }
+      ]
+    },
+    {
+      "id": "physics-laws",
+      "category": "Physics",
+      "color": "#ef4444",
+      "gridCols": 4,
+      "gridRows": 4,
+      "pairs": [
+        { "id": "f=ma",    "a": "F = ma",           "b": "Newton's\n2nd Law" },
+        { "id": "e=mc2",   "a": "E = mc²",          "b": "Mass–Energy\nEquivalence" },
+        { "id": "v=ir",    "a": "V = IR",           "b": "Ohm's Law" },
+        { "id": "gravity", "a": "9.8 m/s²",         "b": "Gravitational\nAcceleration" },
+        { "id": "speed",   "a": "Speed of Light",   "b": "3 × 10⁸ m/s" },
+        { "id": "freq",    "a": "E = hf",           "b": "Planck's\nEquation" },
+        { "id": "boyle",   "a": "PV = k",           "b": "Boyle's Law" },
+        { "id": "snell",   "a": "n₁sinθ₁ = n₂sinθ₂","b": "Snell's Law" }
+      ]
+    }
+  ]
+}

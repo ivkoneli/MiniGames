@@ -1,0 +1,109 @@
+{
+  "title": "Balancing Act",
+  "subject": "Chemistry",
+  "shuffleItems": true,
+  "levels": [
+    {
+      "description": "Balance the hydrogen combustion equation.",
+      "leftTerms": [
+        { "label": "H₂O", "weight": 3, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ],
+      "rightTerms": [
+        { "label": "H₂",  "weight": 2, "coefficient": 2, "adjustable": false },
+        { "label": "O₂",  "weight": 2, "coefficient": 1, "adjustable": false }
+      ]
+    },
+    {
+      "description": "Decomposition of ammonia — find the missing H₂ coefficient.",
+      "leftTerms": [
+        { "label": "NH₃", "weight": 4, "coefficient": 2, "adjustable": false }
+      ],
+      "rightTerms": [
+        { "label": "N₂",  "weight": 2, "coefficient": 1, "adjustable": false },
+        { "label": "H₂",  "weight": 2, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ]
+    },
+    {
+      "description": "Methane combustion — how many O₂ molecules are needed?",
+      "leftTerms": [
+        { "label": "CH₄", "weight": 5, "coefficient": 1, "adjustable": false },
+        { "label": "O₂",  "weight": 2, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ],
+      "rightTerms": [
+        { "label": "CO₂", "weight": 3, "coefficient": 1, "adjustable": false },
+        { "label": "H₂O", "weight": 3, "coefficient": 2, "adjustable": false }
+      ]
+    },
+    {
+      "description": "Synthesis of ammonia — balance the nitrogen side.",
+      "leftTerms": [
+        { "label": "N₂",  "weight": 2, "coefficient": 1, "adjustable": false },
+        { "label": "H₂",  "weight": 2, "coefficient": 3, "adjustable": false }
+      ],
+      "rightTerms": [
+        { "label": "NH₃", "weight": 4, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ]
+    },
+    {
+      "description": "Nitrogen dioxide formation — adjust both sides.",
+      "leftTerms": [
+        { "label": "NO₂", "weight": 3, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ],
+      "rightTerms": [
+        { "label": "NO",  "weight": 2, "coefficient": 2, "adjustable": false },
+        { "label": "O₂",  "weight": 2, "coefficient": 1, "adjustable": false }
+      ]
+    },
+    {
+      "description": "Two unknowns — find coefficients for both sides.",
+      "leftTerms": [
+        { "label": "H₂",  "weight": 2, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 },
+        { "label": "O₂",  "weight": 2, "coefficient": 1, "adjustable": false }
+      ],
+      "rightTerms": [
+        { "label": "H₂O", "weight": 3, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ]
+    },
+    {
+      "description": "Adjust the N₂ and NH₃ coefficients to reach balance.",
+      "leftTerms": [
+        { "label": "N₂",  "weight": 2, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 },
+        { "label": "H₂",  "weight": 2, "coefficient": 3, "adjustable": false }
+      ],
+      "rightTerms": [
+        { "label": "NH₃", "weight": 4, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ]
+    },
+    {
+      "description": "CO₂ formation — find how many carbon dioxide molecules form.",
+      "leftTerms": [
+        { "label": "C",   "weight": 1, "coefficient": 3, "adjustable": false },
+        { "label": "O₂",  "weight": 2, "coefficient": 3, "adjustable": false }
+      ],
+      "rightTerms": [
+        { "label": "CO₂", "weight": 3, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ]
+    },
+    {
+      "description": "Two adjustable coefficients — CH₄ and O₂ must balance the products.",
+      "leftTerms": [
+        { "label": "CH₄", "weight": 5, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 },
+        { "label": "O₂",  "weight": 2, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ],
+      "rightTerms": [
+        { "label": "CO₂", "weight": 3, "coefficient": 2, "adjustable": false },
+        { "label": "H₂O", "weight": 3, "coefficient": 4, "adjustable": false }
+      ]
+    },
+    {
+      "description": "Adjust H₂ and N₂ together to balance the nitrogen compound.",
+      "leftTerms": [
+        { "label": "H₂",  "weight": 2, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 },
+        { "label": "N₂",  "weight": 2, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ],
+      "rightTerms": [
+        { "label": "NH₃", "weight": 4, "coefficient": 1, "adjustable": true, "min": 1, "max": 6 }
+      ]
+    }
+  ]
+}

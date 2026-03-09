@@ -1,0 +1,119 @@
+{
+  "title": "Sort It Out",
+  "subject": "Mixed",
+  "shuffleItems": true,
+  "levels": [
+    {
+      "id": "mammals-vs-reptiles",
+      "category": "Biology",
+      "question": "Is it a Mammal or a Reptile?",
+      "leftLabel": "Mammal",
+      "rightLabel": "Reptile",
+      "leftColor": "#8b5cf6",
+      "rightColor": "#10b981",
+      "items": [
+        { "id": "dog",   "content": "Dog",        "correct": "left",  "hint": "Warm-blooded, nurses young" },
+        { "id": "cat",   "content": "Cat",        "correct": "left",  "hint": "Warm-blooded, nurses young" },
+        { "id": "whale", "content": "Blue Whale", "correct": "left",  "hint": "Lives in water, breathes air" },
+        { "id": "bat",   "content": "Bat",        "correct": "left",  "hint": "Only flying mammal" },
+        { "id": "cobra", "content": "King Cobra", "correct": "right", "hint": "Cold-blooded, scales" },
+        { "id": "gecko", "content": "Gecko",      "correct": "right", "hint": "Cold-blooded, scales" },
+        { "id": "croc",  "content": "Crocodile",  "correct": "right", "hint": "Cold-blooded, scales" },
+        { "id": "turtle","content": "Sea Turtle", "correct": "right", "hint": "Cold-blooded, shell" }
+      ]
+    },
+    {
+      "id": "acid-vs-base",
+      "category": "Chemistry",
+      "question": "Is it an Acid or a Base?",
+      "leftLabel": "Acid",
+      "rightLabel": "Base",
+      "leftColor": "#ef4444",
+      "rightColor": "#3b82f6",
+      "items": [
+        { "id": "hcl",       "content": "Hydrochloric Acid",  "correct": "left",  "hint": "pH ≈ 1" },
+        { "id": "vinegar",   "content": "Vinegar",            "correct": "left",  "hint": "pH ≈ 3 (acetic acid)" },
+        { "id": "lemon",     "content": "Lemon Juice",        "correct": "left",  "hint": "pH ≈ 2 (citric acid)" },
+        { "id": "coffee",    "content": "Coffee",             "correct": "left",  "hint": "pH ≈ 5" },
+        { "id": "bleach",    "content": "Bleach",             "correct": "right", "hint": "pH ≈ 12" },
+        { "id": "ammonia",   "content": "Ammonia",            "correct": "right", "hint": "pH ≈ 11" },
+        { "id": "bakingsoda","content": "Baking Soda",        "correct": "right", "hint": "pH ≈ 9" },
+        { "id": "soap",      "content": "Soap",               "correct": "right", "hint": "pH ≈ 10" }
+      ]
+    },
+    {
+      "id": "ww1-vs-ww2",
+      "category": "History",
+      "question": "Did this happen in WWI or WWII?",
+      "leftLabel": "WWI\n1914–18",
+      "rightLabel": "WWII\n1939–45",
+      "leftColor": "#f59e0b",
+      "rightColor": "#ef4444",
+      "items": [
+        { "id": "archduke",  "content": "Assassination of\nArchduke Franz Ferdinand", "correct": "left"  },
+        { "id": "dday",      "content": "D-Day Normandy\nLandings",                   "correct": "right" },
+        { "id": "trench",    "content": "Trench Warfare on\nthe Western Front",        "correct": "left"  },
+        { "id": "blitz",     "content": "The Blitz\n(London Bombing)",                 "correct": "right" },
+        { "id": "versailles","content": "Treaty of Versailles",                        "correct": "left"  },
+        { "id": "hiroshima", "content": "Hiroshima\nAtomic Bomb",                     "correct": "right" },
+        { "id": "gallipoli", "content": "Battle of Gallipoli",                         "correct": "left"  },
+        { "id": "stalingrad","content": "Battle of Stalingrad",                        "correct": "right" }
+      ]
+    },
+    {
+      "id": "plant-vs-animal-cell",
+      "category": "Biology",
+      "question": "Found only in Plant Cells or only in Animal Cells?",
+      "leftLabel": "Plant Cell\nOnly",
+      "rightLabel": "Animal Cell\nOnly",
+      "leftColor": "#10b981",
+      "rightColor": "#f59e0b",
+      "items": [
+        { "id": "cellwall",    "content": "Cell Wall",              "correct": "left",  "hint": "Rigid outer layer" },
+        { "id": "chloroplast", "content": "Chloroplast",            "correct": "left",  "hint": "Site of photosynthesis" },
+        { "id": "vacuole",     "content": "Large Central\nVacuole", "correct": "left",  "hint": "Stores water & nutrients" },
+        { "id": "centriole",   "content": "Centriole",              "correct": "right", "hint": "Helps cell division" },
+        { "id": "lysosome",    "content": "Lysosome",               "correct": "right", "hint": "Digests waste" },
+        { "id": "flagella",    "content": "Flagella\n(sperm cells)", "correct": "right", "hint": "Aids motility" }
+      ]
+    },
+    {
+      "id": "renewable-vs-fossil",
+      "category": "Energy",
+      "question": "Renewable energy or Fossil Fuel?",
+      "leftLabel": "Renewable",
+      "rightLabel": "Fossil Fuel",
+      "leftColor": "#10b981",
+      "rightColor": "#92400e",
+      "items": [
+        { "id": "solar",     "content": "Solar Power",     "correct": "left",  "hint": "Photovoltaic cells" },
+        { "id": "coal",      "content": "Coal",            "correct": "right", "hint": "Carbon-based, non-renewable" },
+        { "id": "wind",      "content": "Wind Power",      "correct": "left",  "hint": "Turbines harness kinetic energy" },
+        { "id": "natgas",    "content": "Natural Gas",     "correct": "right", "hint": "Methane, non-renewable" },
+        { "id": "hydro",     "content": "Hydroelectric",   "correct": "left",  "hint": "Water-driven turbines" },
+        { "id": "oil",       "content": "Crude Oil",       "correct": "right", "hint": "Petroleum, non-renewable" },
+        { "id": "geo",       "content": "Geothermal",      "correct": "left",  "hint": "Earth's internal heat" },
+        { "id": "tidal",     "content": "Tidal Power",     "correct": "left",  "hint": "Ocean tides" }
+      ]
+    },
+    {
+      "id": "solid-vs-gas",
+      "category": "Chemistry",
+      "question": "Solid or Gas at room temperature (25 °C)?",
+      "leftLabel": "Solid",
+      "rightLabel": "Gas",
+      "leftColor": "#64748b",
+      "rightColor": "#7dd3fc",
+      "items": [
+        { "id": "iron",     "content": "Iron (Fe)",       "correct": "left",  "hint": "Metal, melts at 1538 °C" },
+        { "id": "oxygen",   "content": "Oxygen (O₂)",    "correct": "right", "hint": "Essential for respiration" },
+        { "id": "sulfur",   "content": "Sulfur (S)",      "correct": "left",  "hint": "Yellow non-metal" },
+        { "id": "nitrogen", "content": "Nitrogen (N₂)",  "correct": "right", "hint": "78% of Earth's atmosphere" },
+        { "id": "copper",   "content": "Copper (Cu)",     "correct": "left",  "hint": "Reddish-brown metal" },
+        { "id": "helium",   "content": "Helium (He)",     "correct": "right", "hint": "Noble gas, lightest" },
+        { "id": "diamond",  "content": "Diamond",         "correct": "left",  "hint": "Hardest natural material" },
+        { "id": "co2",      "content": "Carbon Dioxide",  "correct": "right", "hint": "Greenhouse gas" }
+      ]
+    }
+  ]
+}

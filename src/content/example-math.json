@@ -1,0 +1,36 @@
+{
+  "game": "FillInTheBlank",
+  "title": "Quadratic Functions",
+  "subject": "Math",
+  "timeLimit": 120,
+  "shuffleItems": true,
+  "sentences": [
+    {
+      "text": "A quadratic function has the general form f(x) = ___x² + bx + c",
+      "answers": ["a"],
+      "distractors": ["b", "c", "n", "m"],
+      "hint": "The leading coefficient — determines the parabola's width and direction."
+    },
+    {
+      "text": "The ___ of a parabola is the point where the curve changes direction",
+      "answers": ["vertex"],
+      "distractors": ["root", "intercept", "axis", "focus", "origin"],
+      "hint": "The minimum or maximum point of the parabola."
+    },
+    {
+      "text": "When a > 0, the parabola opens ___",
+      "answers": ["upward"],
+      "distractors": ["downward", "leftward", "rightward", "inward"]
+    },
+    {
+      "text": "The x-values where f(x) = 0 are called the ___ of the function",
+      "answers": ["roots"],
+      "distractors": ["vertices", "intercepts", "slopes", "asymptotes"]
+    },
+    {
+      "text": "The ___ of symmetry of a parabola passes through its vertex",
+      "answers": ["axis"],
+      "distractors": ["line", "tangent", "chord", "radius"]
+    }
+  ]
+}

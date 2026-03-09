@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \"require\\(''fs''\\).writeFileSync\\(''f:/Desktop/poso/MiniGames/src/games/SortingGame/SortingGameScene.ts'', require\\(''fs''\\).readFileSync\\(''f:/Desktop/poso/MiniGames/src/games/SortingGame/SortingGameScene.ts'', ''utf8''\\).slice\\(0,5\\)\\)\")",
+      "Bash(rm \"f:/Desktop/poso/MiniGames/write_scene.mjs\")",
+      "Bash(npm run build)"
+    ]
+  }
+}

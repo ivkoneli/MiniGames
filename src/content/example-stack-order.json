@@ -1,0 +1,88 @@
+{
+  "title": "Stack the Order",
+  "subject": "Various",
+  "shuffleItems": true,
+  "levels": [
+    {
+      "id": "history-events",
+      "category": "History",
+      "question": "Stack these events chronologically — earliest at the bottom",
+      "items": [
+        { "id": "h1", "label": "Printing Press",     "order": 1 },
+        { "id": "h2", "label": "French Revolution",  "order": 2 },
+        { "id": "h3", "label": "World War I",         "order": 3 },
+        { "id": "h4", "label": "Moon Landing",        "order": 4 },
+        { "id": "h5", "label": "Berlin Wall Falls",  "order": 5 }
+      ]
+    },
+    {
+      "id": "chemistry-atomic",
+      "category": "Chemistry",
+      "question": "Stack elements by atomic number — lowest at the bottom",
+      "items": [
+        { "id": "c1", "label": "Hydrogen", "order": 1 },
+        { "id": "c2", "label": "Carbon",   "order": 2 },
+        { "id": "c3", "label": "Oxygen",   "order": 3 },
+        { "id": "c4", "label": "Neon",     "order": 4 }
+      ]
+    },
+    {
+      "id": "geography-population",
+      "category": "Geography",
+      "question": "Stack cities by population size — smallest at the bottom",
+      "items": [
+        { "id": "g1", "label": "Belgrade", "order": 1 },
+        { "id": "g2", "label": "Paris",    "order": 2 },
+        { "id": "g3", "label": "New York", "order": 3 },
+        { "id": "g4", "label": "Tokyo",    "order": 4 }
+      ]
+    },
+    {
+      "id": "astronomy-distance",
+      "category": "Astronomy",
+      "question": "Stack planets by distance from the Sun — closest at the bottom",
+      "items": [
+        { "id": "a1", "label": "Mercury", "order": 1 },
+        { "id": "a2", "label": "Venus",   "order": 2 },
+        { "id": "a3", "label": "Earth",   "order": 3 },
+        { "id": "a4", "label": "Mars",    "order": 4 },
+        { "id": "a5", "label": "Jupiter", "order": 5 }
+      ]
+    },
+    {
+      "id": "biology-size",
+      "category": "Biology",
+      "question": "Stack these organisms by size — smallest at the bottom",
+      "items": [
+        { "id": "b1", "label": "Ant",      "order": 1 },
+        { "id": "b2", "label": "Mouse",    "order": 2 },
+        { "id": "b3", "label": "Dog",      "order": 3 },
+        { "id": "b4", "label": "Horse",    "order": 4 },
+        { "id": "b5", "label": "Elephant", "order": 5 }
+      ]
+    },
+    {
+      "id": "history-ancient",
+      "category": "History",
+      "question": "Stack ancient civilizations chronologically — earliest at the bottom",
+      "items": [
+        { "id": "ha1", "label": "Ancient Egypt",   "order": 1 },
+        { "id": "ha2", "label": "Ancient Greece",  "order": 2 },
+        { "id": "ha3", "label": "Roman Empire",    "order": 3 },
+        { "id": "ha4", "label": "Byzantine Emp.",  "order": 4 }
+      ]
+    },
+    {
+      "id": "science-light",
+      "category": "Science",
+      "question": "Stack colors by wavelength — shortest wavelength at the bottom",
+      "items": [
+        { "id": "s1", "label": "Violet", "order": 1 },
+        { "id": "s2", "label": "Blue",   "order": 2 },
+        { "id": "s3", "label": "Green",  "order": 3 },
+        { "id": "s4", "label": "Yellow", "order": 4 },
+        { "id": "s5", "label": "Red",    "order": 5 }
+      ]
+    }
+  ]
+}

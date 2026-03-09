@@ -1,0 +1,202 @@
+{
+  "title": "Ball to Goal",
+  "subject": "Math",
+  "shuffleItems": false,
+  "levels": [
+    {
+      "description": "Pick the curve that acts as a ramp to the goal!",
+      "startPos": [0, 10],
+      "goalPos":  [5, 3],
+      "xRange": [-1, 7],
+      "yRange": [-1, 12],
+      "options": [
+        { "fn": "(x) => -x + 8",             "label": "f(x) = −x + 8" },
+        { "fn": "(x) => x + 3",              "label": "f(x) = x + 3" },
+        { "fn": "(x) => -2 * x + 5",         "label": "f(x) = −2x + 5" },
+        { "fn": "(x) => 0.5 * x * x + 2",   "label": "f(x) = ½x² + 2" }
+      ]
+    },
+    {
+      "description": "Find the parabola that funnels the ball to (0, 0).",
+      "startPos": [-3, 14],
+      "goalPos":  [0, 0],
+      "xRange": [-5, 3],
+      "yRange": [-1, 16],
+      "options": [
+        { "fn": "(x) => x * x + 4",          "label": "f(x) = x² + 4" },
+        { "fn": "(x) => x * x",              "label": "f(x) = x²" },
+        { "fn": "(x) => x * x + 2",          "label": "f(x) = x² + 2" },
+        { "fn": "(x) => -0.5 * x + 3",       "label": "f(x) = −½x + 3" }
+      ]
+    },
+    {
+      "description": "The ball must travel left — pick the curve that reaches the goal.",
+      "startPos": [9, 8],
+      "goalPos":  [4, 2],
+      "xRange": [0, 11],
+      "yRange": [-1, 10],
+      "options": [
+        { "fn": "(x) => 0.25 * x - 0.25",    "label": "f(x) = ¼x − ¼" },
+        { "fn": "(x) => Math.sqrt(x)",        "label": "f(x) = √x" },
+        { "fn": "(x) => x - 7",              "label": "f(x) = x − 7" },
+        { "fn": "(x) => 0.03 * x * x + 1",  "label": "f(x) = 0.03x² + 1" }
+      ]
+    },
+    {
+      "description": "An exponential curve carries the ball to its destination.",
+      "startPos": [3, 9],
+      "goalPos":  [0, 1],
+      "xRange": [-1, 5],
+      "yRange": [-1, 10],
+      "options": [
+        { "fn": "(x) => x * x - 1",          "label": "f(x) = x² − 1" },
+        { "fn": "(x) => 2 * x + 2",          "label": "f(x) = 2x + 2" },
+        { "fn": "(x) => Math.pow(2, x)",     "label": "f(x) = 2ˣ" },
+        { "fn": "(x) => 3 * x - 1",          "label": "f(x) = 3x − 1" }
+      ]
+    },
+    {
+      "description": "The goal is to the left and below — pick the right slope.",
+      "startPos": [7, 10],
+      "goalPos":  [2, 5],
+      "xRange": [-1, 9],
+      "yRange": [-1, 12],
+      "options": [
+        { "fn": "(x) => x + 2",              "label": "f(x) = x + 2" },
+        { "fn": "(x) => 0.5 * x + 4",       "label": "f(x) = ½x + 4" },
+        { "fn": "(x) => 0.5 * x + 1",       "label": "f(x) = ½x + 1" },
+        { "fn": "(x) => -x + 12",            "label": "f(x) = −x + 12" }
+      ]
+    },
+    {
+      "description": "A gentle downward slope leads to the goal — pick the right line!",
+      "startPos": [1, 8],
+      "goalPos":  [7, 2],
+      "xRange": [-1, 9],
+      "yRange": [-1, 10],
+      "options": [
+        { "fn": "(x) => -x + 9",             "label": "f(x) = −x + 9" },
+        { "fn": "(x) => -0.3 * x * x + 8",  "label": "f(x) = −0.3x² + 8" },
+        { "fn": "(x) => 0.5 * x + 1",       "label": "f(x) = ½x + 1" },
+        { "fn": "(x) => x - 2",              "label": "f(x) = x − 2" }
+      ]
+    },
+    {
+      "description": "The goal sits at the bottom of a parabola valley.",
+      "startPos": [-4, 12],
+      "goalPos":  [3, 2],
+      "xRange": [-6, 6],
+      "yRange": [-1, 14],
+      "options": [
+        { "fn": "(x) => 0.1 * (x - 3) * (x - 3) + 2",  "label": "f(x) = 0.1(x−3)² + 2" },
+        { "fn": "(x) => x * x",                          "label": "f(x) = x²" },
+        { "fn": "(x) => -x + 3",                         "label": "f(x) = −x + 3" },
+        { "fn": "(x) => 0.5 * x + 3",                   "label": "f(x) = ½x + 3" }
+      ]
+    },
+    {
+      "description": "Can you find the square-root curve that guides the ball?",
+      "startPos": [8, 3],
+      "goalPos":  [1, 1],
+      "xRange": [-1, 10],
+      "yRange": [-1, 5],
+      "options": [
+        { "fn": "(x) => Math.sqrt(x)",           "label": "f(x) = √x" },
+        { "fn": "(x) => 0.3 * x",               "label": "f(x) = 0.3x" },
+        { "fn": "(x) => 0.1 * x * x",           "label": "f(x) = 0.1x²" },
+        { "fn": "(x) => 0.25 * x + 0.5",        "label": "f(x) = ¼x + ½" }
+      ]
+    },
+    {
+      "description": "The ball needs to roll left — pick the slope that reaches the ledge.",
+      "startPos": [4, 9],
+      "goalPos":  [0, 4],
+      "xRange": [-1, 6],
+      "yRange": [-1, 11],
+      "options": [
+        { "fn": "(x) => 0.3 * x * x",   "label": "f(x) = 0.3x²" },
+        { "fn": "(x) => -x + 8",         "label": "f(x) = −x + 8" },
+        { "fn": "(x) => x + 4",          "label": "f(x) = x + 4" },
+        { "fn": "(x) => x + 1",          "label": "f(x) = x + 1" }
+      ]
+    },
+    {
+      "description": "Negative slope, far goal — choose wisely.",
+      "startPos": [0, 9],
+      "goalPos":  [8, 2],
+      "xRange": [-1, 10],
+      "yRange": [-1, 11],
+      "options": [
+        { "fn": "(x) => -0.875 * x + 9",      "label": "f(x) = −⅞x + 9" },
+        { "fn": "(x) => -x + 8",              "label": "f(x) = −x + 8" },
+        { "fn": "(x) => -0.5 * x + 9",        "label": "f(x) = −½x + 9" },
+        { "fn": "(x) => 0.5 * x * x - 1",    "label": "f(x) = ½x² − 1" }
+      ]
+    },
+    {
+      "description": "The ball starts high on the right — send it left to the goal.",
+      "startPos": [10, 11],
+      "goalPos":  [2, 3],
+      "xRange": [0, 12],
+      "yRange": [-1, 13],
+      "options": [
+        { "fn": "(x) => x - 7",               "label": "f(x) = x − 7" },
+        { "fn": "(x) => 0.04 * x * x",        "label": "f(x) = 0.04x²" },
+        { "fn": "(x) => -x + 8",              "label": "f(x) = −x + 8" },
+        { "fn": "(x) => 0.5 * x + 2",         "label": "f(x) = ½x + 2" }
+      ]
+    },
+    {
+      "description": "A shifted parabola holds the key — find its vertex!",
+      "startPos": [-3, 10],
+      "goalPos":  [-1, 2],
+      "xRange": [-5, 3],
+      "yRange": [-1, 12],
+      "options": [
+        { "fn": "(x) => (x + 1) * (x + 1) + 2",  "label": "f(x) = (x+1)² + 2" },
+        { "fn": "(x) => x * x + 2",               "label": "f(x) = x² + 2" },
+        { "fn": "(x) => -2 * x + 1",              "label": "f(x) = −2x + 1" },
+        { "fn": "(x) => 0.5 * x * x + 1",        "label": "f(x) = ½x² + 1" }
+      ]
+    },
+    {
+      "description": "The goal is exactly on the x-axis. Which line passes through it?",
+      "startPos": [-4, 7],
+      "goalPos":  [3, 0],
+      "xRange": [-6, 5],
+      "yRange": [-1, 9],
+      "options": [
+        { "fn": "(x) => x + 3",               "label": "f(x) = x + 3" },
+        { "fn": "(x) => -x + 3",              "label": "f(x) = −x + 3" },
+        { "fn": "(x) => x - 3",               "label": "f(x) = x − 3" },
+        { "fn": "(x) => 0.5 * x + 1.5",      "label": "f(x) = ½x + 1½" }
+      ]
+    },
+    {
+      "description": "Find the slope that carries the ball left to the goal.",
+      "startPos": [5, 8],
+      "goalPos":  [-1, 1],
+      "xRange": [-3, 7],
+      "yRange": [-1, 10],
+      "options": [
+        { "fn": "(x) => 0.9 * x + 1.9",      "label": "f(x) = 0.9x + 1.9" },
+        { "fn": "(x) => x * x - 1",           "label": "f(x) = x² − 1" },
+        { "fn": "(x) => -0.5 * x + 5.5",     "label": "f(x) = −½x + 5½" },
+        { "fn": "(x) => Math.pow(Math.abs(x), 0.5) * Math.sign(x) + 1", "label": "f(x) = sign(x)·|x|^½ + 1" }
+      ]
+    },
+    {
+      "description": "Absolute value curve — which one leads to the goal?",
+      "startPos": [-4, 9],
+      "goalPos":  [0, 2],
+      "xRange": [-6, 3],
+      "yRange": [-1, 11],
+      "options": [
+        { "fn": "(x) => Math.abs(x) + 2",     "label": "f(x) = |x| + 2" },
+        { "fn": "(x) => x * x + 2",           "label": "f(x) = x² + 2" },
+        { "fn": "(x) => -x + 4",              "label": "f(x) = −x + 4" },
+        { "fn": "(x) => 0.5 * Math.abs(x) + 4", "label": "f(x) = ½|x| + 4" }
+      ]
+    }
+  ]
+}
