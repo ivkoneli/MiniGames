@@ -115,7 +115,7 @@ export class SortingGameScene extends BaseGameScene {
     const FONT = "'Space Grotesk', sans-serif";
     const fs   = (f: number) => `${Math.round(H * f)}px`;
 
-    this.CARD_W = Math.round(W * 0.38);
+    this.CARD_W = Math.round(W * 0.52);
     this.CARD_H = Math.round(H * 0.27);
     this.CARD_X = W / 2;
     this.CARD_Y = H * 0.465;
@@ -170,7 +170,7 @@ export class SortingGameScene extends BaseGameScene {
 
     // ── Question text (below timer bar) ───────────────────────────────────
     this.questionText = this.add.text(W / 2, HUD_H + H * 0.065, '', {
-      fontFamily: FONT, fontSize: fs(0.028), color: '#c8d0e8', align: 'center',
+      fontFamily: FONT, fontSize: fs(0.022), color: '#c8d0e8', align: 'center',
     }).setOrigin(0.5).setDepth(10);
 
     // ── Zone backgrounds ──────────────────────────────────────────────────
