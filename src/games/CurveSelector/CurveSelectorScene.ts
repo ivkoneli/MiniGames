@@ -4,6 +4,7 @@ import { CoordinateSystem } from '../../shared/CoordinateSystem';
 import { AudioManager } from '../../shared/AudioManager';
 import type { CurveSelectorConfig, CurveQuestion, CurveDef } from './types';
 import { haptics } from '../../shared/haptics';
+import { T } from '../../shared/theme';
 
 // ─── Layout constants ──────────────────────────────────────────────────────────
 // Caps at 4:3 so the game is centred and ~70-75% wide on large monitors.
@@ -98,7 +99,7 @@ export class CurveSelectorScene extends BaseGameScene {
     const prompt = this.track(
       this.add
         .text(W / 2, promptY, question.label, {
-          fontSize: `${Math.round(H * 0.023)}px`, fontStyle: 'bold', color: '#e2e8f0',
+          fontSize: `${Math.round(H * 0.023)}px`, fontStyle: 'bold', color: T.text,
           fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - Math.round(W * 0.04) },
         })
         .setOrigin(0.5, 0).setAlpha(0),
@@ -133,8 +134,8 @@ export class CurveSelectorScene extends BaseGameScene {
 
     const bg = this.track(
       this.add
-        .rectangle(cx, cy, PANEL_W, PANEL_H, 0x0c0d1a)
-        .setStrokeStyle(1, 0xffffff, 0.08)
+        .rectangle(cx, cy, PANEL_W, PANEL_H, T.panelBg)
+        .setStrokeStyle(1, T.panelBorderCol, T.panelBorderAlpha)
         .setInteractive({ useHandCursor: true })
         .setAlpha(0),
     ) as Phaser.GameObjects.Rectangle;
@@ -161,7 +162,7 @@ export class CurveSelectorScene extends BaseGameScene {
       this.tweens.add({ targets: bg, scaleX: 1.015, scaleY: 1.015, duration: 120, ease: 'Quad.Out' });
     });
     bg.on('pointerout', () => {
-      bg.setStrokeStyle(1, 0xffffff, 0.08);
+      bg.setStrokeStyle(1, T.panelBorderCol, T.panelBorderAlpha);
       this.tweens.add({ targets: bg, scaleX: 1, scaleY: 1, duration: 120, ease: 'Quad.Out' });
     });
     bg.on('pointerdown', () => {
@@ -214,7 +215,7 @@ export class CurveSelectorScene extends BaseGameScene {
         bg.setStrokeStyle(2, 0xef4444, 0.75);
         this.canInteract = true;
         // Reset border back to default after 1.2 s
-        this.time.delayedCall(1200, () => { bg.setStrokeStyle(1, 0xffffff, 0.08); });
+        this.time.delayedCall(1200, () => { bg.setStrokeStyle(1, T.panelBorderCol, T.panelBorderAlpha); });
       },
     });
   }

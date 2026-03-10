@@ -6,9 +6,10 @@ import {
   playGoBeep,
   playBuzzer,
   playCountdownTick,
+  warmAudio,
 } from './SoundGenerator';
 import { haptics } from '../../shared/haptics';
-import { hudHex } from '../../shared/theme';
+import { hudHex, T, IS_LIGHT } from '../../shared/theme';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -129,7 +130,7 @@ export class SortingGameScene extends BaseGameScene {
     // ── Timer bar (bottom edge of HUD) ────────────────────────────────────
     const BAR_H = Math.max(Math.round(H * 0.012), 7);
     const BAR_Y = HUD_H;
-    this.add.rectangle(W / 2, BAR_Y, W, BAR_H, 0x161824).setDepth(11);
+    this.add.rectangle(W / 2, BAR_Y, W, BAR_H, T.timerBg).setDepth(11);
     // Origin at left so scaleX depletes rightward
     this.timerBarFill = this.add.rectangle(0, BAR_Y, W, BAR_H, 0x10b981)
       .setOrigin(0, 0.5)
@@ -183,7 +184,7 @@ export class SortingGameScene extends BaseGameScene {
     // Each zone takes 50% of the width (no gap — divider sits on top)
     this.leftZoneBg  = this.add.rectangle(W * 0.25, this.ZONE_Y, W * 0.50, this.ZONE_H, 0x7c3aed, 0.07).setDepth(1);
     this.rightZoneBg = this.add.rectangle(W * 0.75, this.ZONE_Y, W * 0.50, this.ZONE_H, 0x00aacc, 0.07).setDepth(1);
-    this.add.rectangle(W / 2, this.ZONE_Y, 1.5, this.ZONE_H, 0x252940, 0.8).setDepth(2);
+    this.add.rectangle(W / 2, this.ZONE_Y, 1.5, this.ZONE_H, T.divider, 0.8).setDepth(2);
 
     // ── Zone labels — placed at top of zone so they don't overlap the card ──
     const zoneLabelY = ZONE_TOP + H * 0.055;
@@ -202,7 +203,7 @@ export class SortingGameScene extends BaseGameScene {
     const BTN_H = Math.round(H * 0.090);
     const BTN_Y = H * 0.880;
 
-    this.leftBtnBg = this.add.rectangle(W * 0.25, BTN_Y, BTN_W, BTN_H, 0x0d0f1e)
+    this.leftBtnBg = this.add.rectangle(W * 0.25, BTN_Y, BTN_W, BTN_H, T.btnBg)
       .setStrokeStyle(2, 0x7c3aed, 0.8).setInteractive({ useHandCursor: true }).setDepth(30);
     this.leftBtnLbl = this.add.text(W * 0.25, BTN_Y, '<- Left', {
       fontFamily: FONT, fontSize: fs(0.032), fontStyle: 'bold', color: '#8b5cf6',
@@ -217,7 +218,7 @@ export class SortingGameScene extends BaseGameScene {
         this.tweens.add({ targets: [this.leftBtnBg, this.leftBtnLbl], scaleX: 1, scaleY: 1, duration: 180, ease: 'Back.Out' });
       });
 
-    this.rightBtnBg = this.add.rectangle(W * 0.75, BTN_Y, BTN_W, BTN_H, 0x0d0f1e)
+    this.rightBtnBg = this.add.rectangle(W * 0.75, BTN_Y, BTN_W, BTN_H, T.btnBg)
       .setStrokeStyle(2, 0x00aacc, 0.8).setInteractive({ useHandCursor: true }).setDepth(30);
     this.rightBtnLbl = this.add.text(W * 0.75, BTN_Y, 'Right ->', {
       fontFamily: FONT, fontSize: fs(0.032), fontStyle: 'bold', color: '#00d4ff',
@@ -251,9 +252,9 @@ export class SortingGameScene extends BaseGameScene {
     const g = this.clockFaceGfx;
     const r = this.clockRadius;
     g.clear();
-    g.fillStyle(0x0d1020, 1);
+    g.fillStyle(T.clockFace, 1);
     g.fillCircle(0, 0, r);
-    g.lineStyle(1.8, 0x3a3f6a, 1);
+    g.lineStyle(1.8, T.border, 1);
     g.strokeCircle(0, 0, r);
     for (let i = 0; i < 12; i++) {
       const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
@@ -291,6 +292,7 @@ export class SortingGameScene extends BaseGameScene {
     this.timerBarFill.setAlpha(1).setScale(1, 1);
     this.updateClockDisplay(this.TIMER_DURATION);
     this.updateTimerBarColor(this.TIMER_DURATION);
+    playCountdownTick(0.14); // tick at "5" so total = 6 sounds: 5,4,3,2,1 + buzzer
 
     this.timerBarTween = this.tweens.add({
       targets: this.timerBarFill,
@@ -418,19 +420,19 @@ export class SortingGameScene extends BaseGameScene {
 
     // Card body
     const bg = this.add.graphics();
-    bg.fillStyle(0x0c0e1a, 1);
+    bg.fillStyle(T.panelBg, 1);
     bg.fillRoundedRect(-CW / 2, -CH / 2, CW, CH, 20);
     bg.lineStyle(2, 0x10b981, 0.65);
     bg.strokeRoundedRect(-CW / 2, -CH / 2, CW, CH, 20);
 
     // Category label
     const cat = this.add.text(0, -CH * 0.38, level.category.toUpperCase(), {
-      fontFamily: FONT, fontSize: fs(0.018), color: '#606880',
+      fontFamily: FONT, fontSize: fs(0.018), color: T.textFade,
     }).setOrigin(0.5);
 
     // Divider
     const div = this.add.graphics();
-    div.lineStyle(1, 0x252940, 1);
+    div.lineStyle(1, T.divider, 1);
     div.beginPath();
     div.moveTo(-CW * 0.38, -CH * 0.25);
     div.lineTo( CW * 0.38, -CH * 0.25);
@@ -439,7 +441,7 @@ export class SortingGameScene extends BaseGameScene {
     // Question text
     const qText = this.add.text(0, -CH * 0.06, level.question, {
       fontFamily: FONT, fontSize: fs(0.040), fontStyle: 'bold',
-      color: '#ffffff', align: 'center',
+      color: T.textMid, align: 'center',
       wordWrap: { width: CW - 60 },
     }).setOrigin(0.5);
 
@@ -454,7 +456,7 @@ export class SortingGameScene extends BaseGameScene {
     const btnY = CH * 0.375;
     let readyLocked = false;
 
-    const readyBg = this.add.rectangle(0, btnY, btnW, btnH, 0x0c0e1a)
+    const readyBg = this.add.rectangle(0, btnY, btnW, btnH, T.panelBg)
       .setStrokeStyle(2, 0x10b981, 0.9)
       .setInteractive({ useHandCursor: true });
     const readyLbl = this.add.text(0, btnY, 'READY!', {
@@ -465,10 +467,11 @@ export class SortingGameScene extends BaseGameScene {
 
     readyBg
       .on('pointerover', () => { if (!readyLocked) { readyBg.setFillStyle(0x0c1f18); readyLbl.setColor('#34d399'); } })
-      .on('pointerout',  () => { readyBg.setFillStyle(0x0c0e1a); readyLbl.setColor('#10b981'); })
+      .on('pointerout',  () => { readyBg.setFillStyle(T.panelBg); readyLbl.setColor('#10b981'); })
       .on('pointerdown', () => {
         if (readyLocked) return;
         readyLocked = true;
+        warmAudio();
         haptics.light();
         this.audio.playClick();
         this.tweens.add({ targets: [readyBg, readyLbl], scaleX: 0.92, scaleY: 0.92, duration: 80 });
@@ -557,16 +560,16 @@ export class SortingGameScene extends BaseGameScene {
     glow.fillRoundedRect(-CW / 2 - 8, -CH / 2 - 8, CW + 16, CH + 16, 24);
 
     const bg = this.add.graphics();
-    bg.fillStyle(0x12131f, 1);
+    bg.fillStyle(T.cardBg, 1);
     bg.fillRoundedRect(-CW / 2, -CH / 2, CW, CH, 16);
-    bg.lineStyle(2, 0x3a3f6a, 1);
+    bg.lineStyle(2, T.border, 1);
     bg.strokeRoundedRect(-CW / 2, -CH / 2, CW, CH, 16);
 
     const hasHint  = !!item.hint;
     const contentY = hasHint ? -CH * 0.10 : 0;
     const ctxt     = this.add.text(0, contentY, item.content, {
       fontFamily: FONT, fontSize: fs(0.044), fontStyle: 'bold',
-      color: '#ffffff', align: 'center',
+      color: T.textMid, align: 'center',
       wordWrap: { width: CW - 36 },
     }).setOrigin(0.5);
 

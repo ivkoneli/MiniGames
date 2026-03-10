@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { BaseGameScene } from '../../shared/BaseGameScene';
 import type { BalancingGameConfig, BalancingLevel, EquationTerm } from './types';
 import { haptics } from '../../shared/haptics';
+import { T } from '../../shared/theme';
 
 // ─── Layout — all dynamic so the game scales to any screen ────────────────────
 
@@ -27,9 +28,9 @@ const FONT_SZ_BTN  = Math.round(H * 0.020);          // smaller +/- label
 const FONT_SZ_LBL  = Math.round(H * 0.032);
 const CHAR_W       = Math.round(FONT_SZ_EQ * 0.58);  // estimated char width
 
-const EQ_FONT    = { fontSize: `${FONT_SZ_EQ}px`,  fontStyle: 'bold', color: '#e2e8f0', fontFamily: 'Space Grotesk, sans-serif' };
-const LABEL_FONT = { fontSize: `${FONT_SZ_LBL}px`, color: '#cbd5e1',  fontFamily: 'Space Grotesk, sans-serif' };
-const COEF_FONT  = { fontSize: `${FONT_SZ_EQ}px`,  fontStyle: 'bold', color: '#f1f5f9', fontFamily: 'Space Grotesk, sans-serif' };
+const EQ_FONT    = { fontSize: `${FONT_SZ_EQ}px`,  fontStyle: 'bold', color: T.text,    fontFamily: 'Space Grotesk, sans-serif' };
+const LABEL_FONT = { fontSize: `${FONT_SZ_LBL}px`, color: T.textMute,                   fontFamily: 'Space Grotesk, sans-serif' };
+const COEF_FONT  = { fontSize: `${FONT_SZ_EQ}px`,  fontStyle: 'bold', color: T.textMid, fontFamily: 'Space Grotesk, sans-serif' };
 const BTN_FONT   = { fontSize: `${FONT_SZ_BTN}px`, fontStyle: 'bold', color: '#a78bfa', fontFamily: 'Space Grotesk, sans-serif' };
 
 const MAX_TILT   = 0.22;
@@ -318,7 +319,7 @@ export class BalancingGameScene extends BaseGameScene {
 
     const coefIdx = this.coefTexts.length - 1;
 
-    const minusBg = this.add.rectangle(x + BTN_SIZE / 2, midY, BTN_SIZE, BTN_SIZE, 0x1e1b30, 1)
+    const minusBg = this.add.rectangle(x + BTN_SIZE / 2, midY, BTN_SIZE, BTN_SIZE, T.inputBg, 1)
       .setStrokeStyle(1, 0xa78bfa, 0.5).setInteractive({ useHandCursor: true }).setAlpha(0);
     const minusLbl = this.add.text(x + BTN_SIZE / 2, midY, '−', { ...BTN_FONT }).setOrigin(0.5, 0.5).setAlpha(0);
     container.add(minusBg);
@@ -329,7 +330,7 @@ export class BalancingGameScene extends BaseGameScene {
     this.tweens.add({ targets: [minusBg, minusLbl], alpha: 1, duration: 200, delay: 100 });
 
     const plusX  = x + BTN_SIZE + COEF_BOX_W;
-    const plusBg = this.add.rectangle(plusX + BTN_SIZE / 2, midY, BTN_SIZE, BTN_SIZE, 0x1e1b30, 1)
+    const plusBg = this.add.rectangle(plusX + BTN_SIZE / 2, midY, BTN_SIZE, BTN_SIZE, T.inputBg, 1)
       .setStrokeStyle(1, 0xa78bfa, 0.5).setInteractive({ useHandCursor: true }).setAlpha(0);
     const plusLbl = this.add.text(plusX + BTN_SIZE / 2, midY, '+', { ...BTN_FONT }).setOrigin(0.5, 0.5).setAlpha(0);
     container.add(plusBg);
@@ -383,7 +384,7 @@ export class BalancingGameScene extends BaseGameScene {
     const btnH = Math.round(H * 0.075);
 
     const bg = this.track(
-      this.add.rectangle(W / 2, btnY, btnW, btnH, 0x111827)
+      this.add.rectangle(W / 2, btnY, btnW, btnH, T.btnBg)
         .setStrokeStyle(1.5, 0x7c3aed, 0.7).setInteractive({ useHandCursor: true }).setAlpha(0),
     ) as Phaser.GameObjects.Rectangle;
 

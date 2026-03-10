@@ -4,9 +4,10 @@ import type { MemoryConfig, MemoryLevel, MemoryPair, CardObject } from './types'
 import {
   playCountdownBeep,
   playGoBeep,
+  warmAudio,
 } from '../SortingGame/SoundGenerator';
 import { haptics } from '../../shared/haptics';
-import { hudHex } from '../../shared/theme';
+import { hudHex, T } from '../../shared/theme';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -157,19 +158,19 @@ export class MemoryGameScene extends BaseGameScene {
 
     // Card body
     const bg = this.add.graphics();
-    bg.fillStyle(0x0c0e1a, 1);
+    bg.fillStyle(T.panelBg, 1);
     bg.fillRoundedRect(-CW / 2, -CH / 2, CW, CH, 20);
     bg.lineStyle(2, col, 0.65);
     bg.strokeRoundedRect(-CW / 2, -CH / 2, CW, CH, 20);
 
     // Category label
     const cat = this.add.text(0, -CH * 0.38, level.category.toUpperCase(), {
-      fontFamily: FONT, fontSize: fs(0.018), color: '#606880',
+      fontFamily: FONT, fontSize: fs(0.018), color: T.textFade,
     }).setOrigin(0.5);
 
     // Divider
     const div = this.add.graphics();
-    div.lineStyle(1, 0x252940, 1);
+    div.lineStyle(1, T.divider, 1);
     div.beginPath();
     div.moveTo(-CW * 0.38, -CH * 0.27);
     div.lineTo( CW * 0.38, -CH * 0.27);
@@ -177,7 +178,7 @@ export class MemoryGameScene extends BaseGameScene {
 
     // Title
     const title = this.add.text(0, -CH * 0.12, 'Memory Match', {
-      fontFamily: FONT, fontSize: fs(0.040), fontStyle: 'bold', color: '#ffffff',
+      fontFamily: FONT, fontSize: fs(0.040), fontStyle: 'bold', color: T.textMid,
     }).setOrigin(0.5);
 
     // Pairs info
@@ -196,7 +197,7 @@ export class MemoryGameScene extends BaseGameScene {
     const btnY = CH * 0.375;
     let readyLocked = false;
 
-    const readyBg = this.add.rectangle(0, btnY, btnW, btnH, 0x0c0e1a)
+    const readyBg = this.add.rectangle(0, btnY, btnW, btnH, T.panelBg)
       .setStrokeStyle(2, col, 0.9)
       .setInteractive({ useHandCursor: true });
     const readyLbl = this.add.text(0, btnY, 'READY!', {
@@ -207,10 +208,11 @@ export class MemoryGameScene extends BaseGameScene {
 
     readyBg
       .on('pointerover', () => { if (!readyLocked) { readyBg.setFillStyle(hexStr(level.color) & 0x111111); readyLbl.setAlpha(0.85); } })
-      .on('pointerout',  () => { readyBg.setFillStyle(0x0c0e1a); readyLbl.setAlpha(1); })
+      .on('pointerout',  () => { readyBg.setFillStyle(T.panelBg); readyLbl.setAlpha(1); })
       .on('pointerdown', () => {
         if (readyLocked) return;
         readyLocked = true;
+        warmAudio();
         haptics.light();
         this.audio.playClick();
         this.tweens.add({ targets: [readyBg, readyLbl], scaleX: 0.92, scaleY: 0.92, duration: 80 });
@@ -364,9 +366,9 @@ export class MemoryGameScene extends BaseGameScene {
 
     // ── Back face ──────────────────────────────────────────────────────────
     const backFace = this.add.graphics();
-    backFace.fillStyle(0x0d0f1e, 1);
+    backFace.fillStyle(T.cardBg2, 1);
     backFace.fillRoundedRect(-CW / 2, -CH / 2, CW, CH, radius);
-    backFace.lineStyle(1.5, 0x252945, 1);
+    backFace.lineStyle(1.5, T.border, 1);
     backFace.strokeRoundedRect(-CW / 2, -CH / 2, CW, CH, radius);
     // Decorative inner diamond pattern
     const dm = Math.min(CW, CH) * 0.18;
@@ -381,9 +383,9 @@ export class MemoryGameScene extends BaseGameScene {
 
     // ── Front face ─────────────────────────────────────────────────────────
     const frontFace = this.add.graphics();
-    frontFace.fillStyle(0x12131f, 1);
+    frontFace.fillStyle(T.cardBg, 1);
     frontFace.fillRoundedRect(-CW / 2, -CH / 2, CW, CH, radius);
-    frontFace.lineStyle(1.5, 0x3a3f6a, 1);
+    frontFace.lineStyle(1.5, T.border, 1);
     frontFace.strokeRoundedRect(-CW / 2, -CH / 2, CW, CH, radius);
     // Top accent bar
     frontFace.fillStyle(lcol, 0.55);
@@ -395,7 +397,7 @@ export class MemoryGameScene extends BaseGameScene {
       fontFamily: FONT,
       fontSize: fs(Math.max(baseFontF, 0.018)),
       fontStyle: 'bold',
-      color: '#ffffff',
+      color: T.textMid,
       align: 'center',
       wordWrap: { width: CW - 16 },
     }).setOrigin(0.5);

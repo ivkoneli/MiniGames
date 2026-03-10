@@ -85,3 +85,14 @@ export function playBuzzer(onEnd?: () => void): void {
 export function playCountdownTick(volume = 0.28, onEnd?: () => void): void {
   tone(1200, 0.055, 'square', volume, onEnd);
 }
+
+/**
+ * Pre-warm the AudioContext inside a user-gesture handler so it is already
+ * running when the countdown fires 100-400 ms later (iOS Safari requirement).
+ */
+export function warmAudio(): void {
+  try {
+    const ctx = getCtx();
+    if (ctx.state !== 'running') ctx.resume();
+  } catch { /* ignore */ }
+}
