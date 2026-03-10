@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { BaseGameScene } from '../../shared/BaseGameScene';
 import type { StackOrderConfig, StackOrderLevel, StackOrderItem } from './types';
 import { haptics } from '../../shared/haptics';
+import { T } from '../../shared/theme';
 
 // ─── Colors ───────────────────────────────────────────────────────────────────
 const COL_BLOCK_FILL   = 0x130d2f;
@@ -872,7 +873,7 @@ export class StackTheOrderScene extends BaseGameScene {
     // Card
     const cardW = Math.round(W * 0.58);
     const cardH = Math.round(H * 0.56);
-    const card  = this.add.rectangle(W / 2, H / 2, cardW, cardH, 0x0d0f1e)
+    const card  = this.add.rectangle(W / 2, H / 2, cardW, cardH, T.panelBg)
       .setStrokeStyle(1, 0xffffff, 0.10)
       .setDepth(101).setScale(0.82).setAlpha(0);
     this.tweens.add({ targets: card, scaleX: 1, scaleY: 1, alpha: 1, duration: 340, delay: 100, ease: 'Back.Out' });

@@ -3,6 +3,7 @@ import { BaseGameScene } from '../../shared/BaseGameScene';
 import { CoordinateSystem } from '../../shared/CoordinateSystem';
 import type { BallToGoalConfig, BallToGoalLevel, BallState } from './types';
 import { haptics } from '../../shared/haptics';
+import { T } from '../../shared/theme';
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
 // Caps at 4:3 so the game is centred and ~70-75% wide on large monitors.
@@ -161,7 +162,7 @@ export class BallToGoalScene extends BaseGameScene {
     if (level.description) {
       const prompt = this.track(
         this.add.text(W / 2, descY, level.description, {
-          fontSize: `${Math.round(H * 0.017)}px`, fontStyle: 'bold', color: '#e2e8f0',
+          fontSize: `${Math.round(H * 0.017)}px`, fontStyle: 'bold', color: T.text,
           fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - Math.round(W * 0.04) },
         }).setOrigin(0.5, 0).setAlpha(0),
       );
@@ -170,7 +171,7 @@ export class BallToGoalScene extends BaseGameScene {
 
     // ── Graph background ──
     const graphBg = this.track(
-      this.add.rectangle(GX + GW / 2, GY + GH / 2, GW, GH, 0x0c0d1a)
+      this.add.rectangle(GX + GW / 2, GY + GH / 2, GW, GH, T.panelBg)
         .setStrokeStyle(1, 0xffffff, 0.06).setAlpha(0),
     );
 
@@ -278,7 +279,7 @@ export class BallToGoalScene extends BaseGameScene {
       const leftX = btnCX - BTN_W / 2;
 
       const bg = this.track(
-        this.add.rectangle(btnCX, btnCY, BTN_W, BTN_H, 0x0c0d1a)
+        this.add.rectangle(btnCX, btnCY, BTN_W, BTN_H, T.panelBg)
           .setStrokeStyle(1, color, 0.22).setInteractive({ useHandCursor: true }).setAlpha(0),
       ) as Phaser.GameObjects.Rectangle;
       this.buttonBgs.push(bg);
@@ -290,7 +291,7 @@ export class BallToGoalScene extends BaseGameScene {
         fontFamily: 'Space Grotesk, sans-serif',
       }).setAlpha(0));
       const eqText = this.track(this.add.text(leftX + eqPadX, btnCY, eq.label, {
-        fontSize: fs13, color: '#e2e8f0', fontFamily: 'Space Grotesk, sans-serif',
+        fontSize: fs13, color: T.text, fontFamily: 'Space Grotesk, sans-serif',
         wordWrap: { width: BTN_W - Math.round(W * 0.015) },
       }).setOrigin(0, 0.5).setAlpha(0));
 
@@ -612,7 +613,7 @@ export class BallToGoalScene extends BaseGameScene {
     const retryW = Math.round(W * 0.138);
     const retryH = Math.round(H * 0.044);
 
-    const bg = this.add.rectangle(btnCX, btnCY, retryW, retryH, 0x0c0d1a)
+    const bg = this.add.rectangle(btnCX, btnCY, retryW, retryH, T.panelBg)
       .setStrokeStyle(1, 0xef4444, 0.5).setDepth(20).setAlpha(0)
       .setInteractive({ useHandCursor: true });
 
@@ -669,7 +670,7 @@ export class BallToGoalScene extends BaseGameScene {
 
     const cardW = Math.round(W * 0.78);
     const cardH = Math.round(H * 0.52);
-    const card = this.add.rectangle(W / 2, H / 2, cardW, cardH, 0x0d0f1e)
+    const card = this.add.rectangle(W / 2, H / 2, cardW, cardH, T.panelBg)
       .setStrokeStyle(1, 0xffffff, 0.1).setDepth(101).setScale(0.82).setAlpha(0);
     this.tweens.add({ targets: card, scaleX: 1, scaleY: 1, alpha: 1, duration: 340, delay: 100, ease: 'Back.Out' });
 
