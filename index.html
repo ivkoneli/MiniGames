@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/style.css" />
+  <script>
+    (function(){ var t=localStorage.getItem('mg-theme'); if(t==='light') document.documentElement.setAttribute('data-theme','light'); })();
+  </script>
 </head>
 <body>
 
@@ -58,6 +61,10 @@
     <div class="games-grid" id="gamesGrid"></div>
 
   </div>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+    <span id="themeIcon">☀</span>
+  </button>
 
   <script type="module" src="/src/main.ts"></script>
 </body>

@@ -173,3 +173,25 @@ document.getElementById('searchBar')!.addEventListener('input', e => {
 
 renderTags();
 renderCards(getFiltered());
+
+// ─── Theme toggle ───────────────────────────────────────────────
+
+const THEME_KEY = 'mg-theme';
+
+function applyTheme(theme: 'dark' | 'light'): void {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.textContent = theme === 'light' ? '☾' : '☀';
+}
+
+applyTheme((localStorage.getItem(THEME_KEY) as 'dark' | 'light' | null) ?? 'dark');
+
+document.getElementById('themeToggle')!.addEventListener('click', () => {
+  const next = document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';
+  applyTheme(next);
+  localStorage.setItem(THEME_KEY, next);
+});

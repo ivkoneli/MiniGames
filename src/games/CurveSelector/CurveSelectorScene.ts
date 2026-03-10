@@ -53,7 +53,7 @@ export class CurveSelectorScene extends BaseGameScene {
   // ─── BaseGameScene hooks ───────────────────────────────────────
 
   protected setupUI(): void {
-    const fs13  = `${Math.round(H * 0.013)}px`;
+    const fs13  = `${Math.round(H * 0.019)}px`;
     const hudY  = Math.round(HUD_H * 0.5);
     this.add
       .text(Math.round(W * 0.014), hudY, '← Menu', { fontSize: fs13, color: '#475569', fontFamily: 'Space Grotesk, sans-serif' })
@@ -98,7 +98,7 @@ export class CurveSelectorScene extends BaseGameScene {
     const prompt = this.track(
       this.add
         .text(W / 2, promptY, question.label, {
-          fontSize: `${Math.round(H * 0.017)}px`, fontStyle: 'bold', color: '#e2e8f0',
+          fontSize: `${Math.round(H * 0.023)}px`, fontStyle: 'bold', color: '#e2e8f0',
           fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - Math.round(W * 0.04) },
         })
         .setOrigin(0.5, 0).setAlpha(0),
@@ -145,7 +145,7 @@ export class CurveSelectorScene extends BaseGameScene {
 
     const labelText = this.track(
       this.add.text(pos.x + Math.round(W * 0.009), pos.y + Math.round(H * 0.006), label, {
-        fontSize: `${Math.round(H * 0.012)}px`, fontStyle: 'bold',
+        fontSize: `${Math.round(H * 0.018)}px`, fontStyle: 'bold',
         color: `#${color.toString(16).padStart(6, '0')}`,
         fontFamily: 'Space Grotesk, sans-serif',
       }).setAlpha(0),
