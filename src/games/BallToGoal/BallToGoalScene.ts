@@ -13,7 +13,7 @@ const _dpr     = window.devicePixelRatio || 1;
 const H        = Math.round((window.visualViewport?.height ?? window.innerHeight) * _dpr);
 const W        = Math.min(Math.round((window.visualViewport?.width ?? window.innerWidth) * _dpr), Math.round(H * (4 / 3)));
 const HUD_H    = Math.round(H * 0.060);
-const PROMPT_H = Math.round(H * 0.045);
+const PROMPT_H = Math.round(H * 0.110);
 const GX       = Math.round(W * 0.014);
 const GY       = HUD_H + PROMPT_H;
 const GPAD     = Math.round(W * 0.030);
@@ -163,7 +163,7 @@ export class BallToGoalScene extends BaseGameScene {
     if (level.description) {
       const prompt = this.track(
         this.add.text(W / 2, descY, level.description, {
-          fontSize: `${Math.round(H * 0.026)}px`, fontStyle: 'bold', color: T.text,
+          fontSize: `${Math.round(H * 0.030)}px`, fontStyle: 'bold', color: T.text,
           fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - Math.round(W * 0.04) },
         }).setOrigin(0.5, 0).setAlpha(0),
       );
@@ -255,7 +255,7 @@ export class BallToGoalScene extends BaseGameScene {
     const totalH = level.options.length * BTN_H + (level.options.length - 1) * BTN_GAP;
     const sideStartY = GY + (GH - totalH) / 2; // centred vertically in sidebar (wide only)
     const fs16 = `${Math.round(H * 0.024)}px`;
-    const fs13 = `${Math.round(H * 0.021)}px`;
+    const fs13 = `${Math.round(H * 0.027)}px`;
     const stripPad = Math.round(W * 0.003);
     const letterPadX = Math.round(W * 0.012);
     const letterPadY = Math.round(BTN_H * 0.22);

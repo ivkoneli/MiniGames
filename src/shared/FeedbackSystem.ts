@@ -47,8 +47,9 @@ export class FeedbackSystem {
     const cx = x ?? this.scene.scale.width / 2;
     const cy = y ?? this.scene.scale.height / 2;
 
+    const fs = Math.round(this.scene.scale.height * 0.10);
     const text = this.scene.add
-      .text(cx, cy, '✗', { fontSize: '72px', color: '#ef4444' })
+      .text(cx, cy, '✗', { fontSize: `${fs}px`, color: '#ef4444' })
       .setOrigin(0.5)
       .setDepth(200)
       .setAlpha(0);

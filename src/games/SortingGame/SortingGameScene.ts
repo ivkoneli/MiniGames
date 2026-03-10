@@ -158,8 +158,8 @@ export class SortingGameScene extends BaseGameScene {
       .on('pointerout',  function (this: Phaser.GameObjects.Text) { this.setColor('#475569'); })
       .on('pointerdown', () => { window.location.href = import.meta.env.BASE_URL; });
 
-    this.scoreText = this.add.text(W * 0.54, HUD_H / 2, 'Score: 0', {
-      fontFamily: FONT, fontSize: fs(0.030), fontStyle: 'bold', color: '#00d4ff',
+    this.scoreText = this.add.text(W * 0.53, HUD_H / 2, '0 pts', {
+      fontFamily: FONT, fontSize: fs(0.022), fontStyle: 'bold', color: '#00d4ff',
     }).setOrigin(0.5).setDepth(20);
 
     this.streakBadge = this.add.text(W * 0.76, HUD_H / 2, '', {
@@ -731,7 +731,7 @@ export class SortingGameScene extends BaseGameScene {
     const lvl     = this.sessionIndex + 1;
     const maxLvl  = this.sessionLevels.length;
 
-    this.scoreText.setText(`Score: ${s.correct}`);
+    this.scoreText.setText(`${s.correct} pts`);
     this.progressText.setText(`${current}/${total}  L${lvl}/${maxLvl}`);
 
     if (this.streak >= 2) {
