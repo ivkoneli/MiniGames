@@ -94,5 +94,11 @@ export function warmAudio(): void {
   try {
     const ctx = getCtx();
     if (ctx.state !== 'running') ctx.resume();
+    // Play a 1-sample silent buffer — unlocks audio on iOS Safari within the gesture
+    const buf = ctx.createBuffer(1, 1, ctx.sampleRate);
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    src.connect(ctx.destination);
+    src.start(0);
   } catch { /* ignore */ }
 }

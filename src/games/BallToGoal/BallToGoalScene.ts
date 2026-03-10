@@ -26,7 +26,7 @@ const IS_NARROW = (window.visualViewport?.width ?? window.innerWidth) < 900;
 // Wide:   graph on left, vertical button sidebar on right
 const GW = IS_NARROW ? W - GX * 2 : W - 240;
 const GH = IS_NARROW
-  ? Math.round((H - GY - Math.round(H * 0.005)) * 0.52)
+  ? Math.round((H - GY - Math.round(H * 0.005)) * 0.44)
   : H - GY - Math.round(H * 0.005);
 
 const BTN_W = IS_NARROW
@@ -162,7 +162,7 @@ export class BallToGoalScene extends BaseGameScene {
     if (level.description) {
       const prompt = this.track(
         this.add.text(W / 2, descY, level.description, {
-          fontSize: `${Math.round(H * 0.017)}px`, fontStyle: 'bold', color: T.text,
+          fontSize: `${Math.round(H * 0.022)}px`, fontStyle: 'bold', color: T.text,
           fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - Math.round(W * 0.04) },
         }).setOrigin(0.5, 0).setAlpha(0),
       );
@@ -253,8 +253,8 @@ export class BallToGoalScene extends BaseGameScene {
     const gridY  = GY + GH + Math.round(H * 0.010); // y of the 2×2 area (narrow only)
     const totalH = level.options.length * BTN_H + (level.options.length - 1) * BTN_GAP;
     const sideStartY = GY + (GH - totalH) / 2; // centred vertically in sidebar (wide only)
-    const fs16 = `${Math.round(H * 0.022)}px`;
-    const fs13 = `${Math.round(H * 0.019)}px`;
+    const fs16 = `${Math.round(H * 0.024)}px`;
+    const fs13 = `${Math.round(H * 0.021)}px`;
     const stripPad = Math.round(W * 0.003);
     const letterPadX = Math.round(W * 0.012);
     const letterPadY = Math.round(BTN_H * 0.22);

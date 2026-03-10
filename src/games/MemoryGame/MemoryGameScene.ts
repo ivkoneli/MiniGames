@@ -93,19 +93,19 @@ export class MemoryGameScene extends BaseGameScene {
       .on('pointerout',  function (this: Phaser.GameObjects.Text) { this.setColor('#475569'); })
       .on('pointerdown', () => { window.location.href = import.meta.env.BASE_URL; });
 
-    // Pairs counter — centered so text growth doesn't cause overlap
-    this.pairsText = this.add.text(W * 0.44, HUD_H / 2, 'Pairs: 0/0', {
-      fontFamily: FONT, fontSize: fs(0.022), fontStyle: 'bold', color: '#10b981',
+    // Pairs counter
+    this.pairsText = this.add.text(W * 0.38, HUD_H / 2, 'Pairs: 0/0', {
+      fontFamily: FONT, fontSize: fs(0.018), fontStyle: 'bold', color: '#10b981',
     }).setOrigin(0.5, 0.5).setDepth(20);
 
     // Moves counter
-    this.movesText = this.add.text(W * 0.70, HUD_H / 2, 'Moves: 0', {
-      fontFamily: FONT, fontSize: fs(0.022), fontStyle: 'bold', color: '#00d4ff',
+    this.movesText = this.add.text(W * 0.62, HUD_H / 2, 'Moves: 0', {
+      fontFamily: FONT, fontSize: fs(0.018), fontStyle: 'bold', color: '#00d4ff',
     }).setOrigin(0.5, 0.5).setDepth(20);
 
     // Level progress
     this.levelText = this.add.text(W * 0.975, HUD_H / 2, 'L1/1', {
-      fontFamily: FONT, fontSize: fs(0.019), color: '#606880',
+      fontFamily: FONT, fontSize: fs(0.018), color: '#606880',
     }).setOrigin(1, 0.5).setDepth(20);
   }
 
@@ -146,7 +146,7 @@ export class MemoryGameScene extends BaseGameScene {
     const FONT = "'Space Grotesk', sans-serif";
     const fs   = (f: number) => `${Math.round(H * f)}px`;
     const CW   = Math.round(W * 0.82);
-    const CH   = Math.round(H * 0.54);
+    const CH   = Math.round(H * 0.44);
     const col  = hexStr(level.color);
 
     const intro = this.add.container(W / 2, H * 0.47).setDepth(60);

@@ -20,11 +20,16 @@ const PANEL_W  = Math.round((W - MARGIN * 2 - GAP) / 2);
 const PANEL_H  = PANEL_W; // square panels
 const GRID_PAD = Math.round(W * 0.024);
 
+const GRID_H_TOTAL  = PANEL_H * 2 + GAP;
+const AVAIL_H_GRID  = H - HUD_H - PROMPT_H;
+const VERT_OFFSET   = Math.max(0, Math.round((AVAIL_H_GRID - GRID_H_TOTAL) / 2));
+const PANEL_TOP     = HUD_H + PROMPT_H + VERT_OFFSET;
+
 const PANELS = [
-  { x: MARGIN,                  y: HUD_H + PROMPT_H },
-  { x: MARGIN + PANEL_W + GAP,  y: HUD_H + PROMPT_H },
-  { x: MARGIN,                  y: HUD_H + PROMPT_H + PANEL_H + GAP },
-  { x: MARGIN + PANEL_W + GAP,  y: HUD_H + PROMPT_H + PANEL_H + GAP },
+  { x: MARGIN,                  y: PANEL_TOP },
+  { x: MARGIN + PANEL_W + GAP,  y: PANEL_TOP },
+  { x: MARGIN,                  y: PANEL_TOP + PANEL_H + GAP },
+  { x: MARGIN + PANEL_W + GAP,  y: PANEL_TOP + PANEL_H + GAP },
 ];
 
 const SLOT_COLORS = [0x7c3aed, 0x2563eb, 0x10b981, 0xf59e0b];

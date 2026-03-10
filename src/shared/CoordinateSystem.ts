@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { IS_LIGHT } from './theme';
 
 export interface CoordSystemOptions {
   /** Panel top-left corner in screen pixels */
@@ -81,19 +82,20 @@ export class CoordinateSystem {
     const mx = (v: number) => left   + ((v - xRange[0]) / (xRange[1] - xRange[0])) * (right - left);
     const my = (v: number) => bottom - ((v - yRange[0]) / (yRange[1] - yRange[0])) * (bottom - top);
 
+    const LC = IS_LIGHT ? 0x000000 : 0xffffff;
     // Minor grid lines
-    gfx.lineStyle(1, 0xffffff, 0.04);
+    gfx.lineStyle(1, LC, IS_LIGHT ? 0.08 : 0.04);
     for (let x = Math.ceil(xRange[0]);  x <= Math.floor(xRange[1]);  x++) gfx.lineBetween(mx(x), top,  mx(x), bottom);
     for (let y = Math.ceil(yRange[0]);  y <= Math.floor(yRange[1]);  y++) gfx.lineBetween(left,  my(y), right,  my(y));
 
     // Axes
-    gfx.lineStyle(1, 0xffffff, 0.22);
+    gfx.lineStyle(1.5, LC, IS_LIGHT ? 0.45 : 0.22);
     if (yRange[0] <= 0 && 0 <= yRange[1]) gfx.lineBetween(left,  my(0), right, my(0));
     if (xRange[0] <= 0 && 0 <= xRange[1]) gfx.lineBetween(mx(0), top,   mx(0), bottom);
 
     // Integer tick marks
     const tick = 3;
-    gfx.lineStyle(1, 0xffffff, 0.14);
+    gfx.lineStyle(1, LC, IS_LIGHT ? 0.20 : 0.14);
     for (let x = Math.ceil(xRange[0]); x <= Math.floor(xRange[1]); x++) {
       if (x === 0) continue;
       const sx = mx(x);

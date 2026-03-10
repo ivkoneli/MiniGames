@@ -2,19 +2,19 @@ import Phaser from 'phaser';
 import { BaseGameScene } from '../../shared/BaseGameScene';
 import type { StackOrderConfig, StackOrderLevel, StackOrderItem } from './types';
 import { haptics } from '../../shared/haptics';
-import { T } from '../../shared/theme';
+import { T, IS_LIGHT } from '../../shared/theme';
 
 // ─── Colors ───────────────────────────────────────────────────────────────────
-const COL_BLOCK_FILL   = 0x130d2f;
-const COL_BLOCK_STROKE = 0x7c3aed;
-const COL_HOVER_STROKE = 0xa78bfa;
-const COL_SUCCESS_FILL = 0x052d1a;
+const COL_BLOCK_FILL   = T.cardBg;
+const COL_BLOCK_STROKE = IS_LIGHT ? 0x7c3aed : 0xa78bfa;
+const COL_HOVER_STROKE = IS_LIGHT ? 0x6d28d9 : 0xc4b5fd;
+const COL_SUCCESS_FILL = IS_LIGHT ? 0xd1fae5 : 0x052d1a;
 const COL_SUCCESS_STR  = 0x10b981;
 const COL_FAIL_STROKE  = 0xef4444;
-const COL_HOOK         = 0x94a3b8;
+const COL_HOOK         = IS_LIGHT ? 0x475569 : 0x94a3b8;
 const COL_GROUND       = 0x4f46e5;
-const COL_TEXT         = '#e2e8f0';
-const COL_DIM          = '#2d2b55';
+const COL_TEXT         = T.textMid;
+const COL_DIM          = T.textDim;
 
 interface SelectionEntry {
   item:      StackOrderItem;
@@ -220,7 +220,7 @@ export class StackTheOrderScene extends BaseGameScene {
     hookGfx.fillRect(-Math.floor(rodW / 2), CEIL_Y + CEIL_THICK, rodW, ROD_LEN);
 
     // Hook body
-    hookGfx.fillStyle(0x1e1b4b, 1);
+    hookGfx.fillStyle(T.cardBg, 1);
     hookGfx.fillRoundedRect(-BODY_W / 2, bodyTop, BODY_W, BODY_H, 5);
     hookGfx.lineStyle(Math.round(W * 0.0035), COL_HOOK, 1);
     hookGfx.strokeRoundedRect(-BODY_W / 2, bodyTop, BODY_W, BODY_H, 5);
@@ -287,7 +287,7 @@ export class StackTheOrderScene extends BaseGameScene {
     const dotY       = Math.round(H * 0.026);
     for (let i = 0; i < total; i++) {
       const dot = this.tr(this.add.graphics());
-      dot.fillStyle(i < current ? 0x7c3aed : 0x2d2b55);
+      dot.fillStyle(i < current ? 0x7c3aed : T.border);
       dot.fillCircle(dotStartX + i * dotSpacing, dotY, dotR);
     }
 

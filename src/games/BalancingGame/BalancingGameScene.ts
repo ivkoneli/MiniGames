@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { BaseGameScene } from '../../shared/BaseGameScene';
 import type { BalancingGameConfig, BalancingLevel, EquationTerm } from './types';
 import { haptics } from '../../shared/haptics';
-import { T } from '../../shared/theme';
+import { T, IS_LIGHT } from '../../shared/theme';
 
 // ─── Layout — all dynamic so the game scales to any screen ────────────────────
 
@@ -146,12 +146,19 @@ export class BalancingGameScene extends BaseGameScene {
     this.drawBeam(beamGfx, level);
 
     const pivotGfx = this.track(this.add.graphics());
-    pivotGfx.fillStyle(0x7c3aed, 0.9);
+    pivotGfx.fillStyle(IS_LIGHT ? 0xffffff : 0x070810, 1);
     pivotGfx.fillTriangle(
       W / 2 - TRI_W / 2, PIVOT_Y + TRI_H,
       W / 2 + TRI_W / 2, PIVOT_Y + TRI_H,
       W / 2,             PIVOT_Y,
     );
+    pivotGfx.lineStyle(2.5, 0x7c3aed, 1);
+    pivotGfx.beginPath();
+    pivotGfx.moveTo(W / 2 - TRI_W / 2, PIVOT_Y + TRI_H);
+    pivotGfx.lineTo(W / 2 + TRI_W / 2, PIVOT_Y + TRI_H);
+    pivotGfx.lineTo(W / 2,             PIVOT_Y);
+    pivotGfx.closePath();
+    pivotGfx.strokePath();
     const groundGfx = this.track(this.add.graphics());
     groundGfx.lineStyle(3, 0x7c3aed, 0.45);
     groundGfx.beginPath();
@@ -385,18 +392,21 @@ export class BalancingGameScene extends BaseGameScene {
 
     const bg = this.track(
       this.add.rectangle(W / 2, btnY, btnW, btnH, T.btnBg)
-        .setStrokeStyle(1.5, 0x7c3aed, 0.7).setInteractive({ useHandCursor: true }).setAlpha(0),
+        .setStrokeStyle(1.5, 0x10b981, 0.7).setInteractive({ useHandCursor: true }).setAlpha(0),
     ) as Phaser.GameObjects.Rectangle;
 
     const lbl = this.track(
       this.add.text(W / 2, btnY, '▶  Check', {
-        fontSize: `${Math.round(H * 0.022)}px`, fontStyle: 'bold', color: '#a78bfa',
+        fontSize: `${Math.round(H * 0.022)}px`, fontStyle: 'bold', color: '#10b981',
         fontFamily: 'Space Grotesk, sans-serif',
       }).setOrigin(0.5, 0.5).setAlpha(0),
     );
 
     this.interactiveUI.push(bg, lbl);
     this.tweens.add({ targets: [bg, lbl], alpha: 1, duration: 280, delay: 220 });
+
+    bg.on('pointerover', () => { bg.setStrokeStyle(2, 0x10b981, 1); lbl.setColor('#34d399'); })
+      .on('pointerout',  () => { bg.setStrokeStyle(1.5, 0x10b981, 0.7); lbl.setColor('#10b981'); });
 
     bg.on('pointerdown', () => {
       if (this.isAnimating) return;
@@ -507,7 +517,7 @@ export class BalancingGameScene extends BaseGameScene {
   private showRetryButton(): void {
     const btnY = PIVOT_Y + TRI_H + Math.round(H * 0.045);
 
-    const bg = this.add.rectangle(W / 2, btnY, Math.round(W * 0.44), Math.round(H * 0.060), 0x0c0d1a)
+    const bg = this.add.rectangle(W / 2, btnY, Math.round(W * 0.44), Math.round(H * 0.060), T.panelBg)
       .setStrokeStyle(1, 0xef4444, 0.5).setDepth(20).setAlpha(0)
       .setInteractive({ useHandCursor: true });
 

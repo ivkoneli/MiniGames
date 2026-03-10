@@ -143,7 +143,7 @@ export class SortingGameScene extends BaseGameScene {
     this.clockFaceGfx   = this.add.graphics();
     this.clockHandGfx   = this.add.graphics();
     this.clockNum = this.add.text(0, this.clockRadius * 0.22, '5', {
-      fontFamily: FONT, fontSize: fs(0.020), fontStyle: 'bold', color: '#ffffff',
+      fontFamily: FONT, fontSize: fs(0.020), fontStyle: 'bold', color: T.textMid,
     }).setOrigin(0.5);
     this.clockContainer.add([this.clockFaceGfx, this.clockHandGfx, this.clockNum]);
     this.buildClockFace();
@@ -339,7 +339,7 @@ export class SortingGameScene extends BaseGameScene {
   private updateClockDisplay(seconds: number): void {
     this.clockNum.setText(`${seconds}`);
     this.redrawClockHand(seconds);
-    this.clockNum.setColor(seconds <= 2 ? '#ef4444' : seconds <= 3 ? '#f59e0b' : '#ffffff');
+    this.clockNum.setColor(seconds <= 2 ? '#ef4444' : seconds <= 3 ? '#f59e0b' : T.textMid);
   }
 
   private updateTimerBarColor(seconds: number): void {
@@ -409,7 +409,7 @@ export class SortingGameScene extends BaseGameScene {
     const FONT = "'Space Grotesk', sans-serif";
     const fs   = (f: number) => `${Math.round(H * f)}px`;
     const CW   = Math.round(W * 0.82);
-    const CH   = Math.round(H * 0.54);
+    const CH   = Math.round(H * 0.44);
 
     const intro = this.add.container(W / 2, H * 0.47).setDepth(60);
 
@@ -556,13 +556,13 @@ export class SortingGameScene extends BaseGameScene {
     const container = this.add.container(this.CARD_X, this.CARD_Y).setDepth(50);
 
     const glow = this.add.graphics();
-    glow.fillStyle(0x3a3f8a, 0.10);
-    glow.fillRoundedRect(-CW / 2 - 8, -CH / 2 - 8, CW + 16, CH + 16, 24);
+    glow.lineStyle(3, IS_LIGHT ? 0x8b5cf6 : 0x5b5fe6, IS_LIGHT ? 0.30 : 0.45);
+    glow.strokeRoundedRect(-CW / 2 - 5, -CH / 2 - 5, CW + 10, CH + 10, 21);
 
     const bg = this.add.graphics();
     bg.fillStyle(T.cardBg, 1);
     bg.fillRoundedRect(-CW / 2, -CH / 2, CW, CH, 16);
-    bg.lineStyle(2, T.border, 1);
+    bg.lineStyle(2, IS_LIGHT ? 0x6366f1 : 0x5b5fe6, 1);
     bg.strokeRoundedRect(-CW / 2, -CH / 2, CW, CH, 16);
 
     const hasHint  = !!item.hint;
