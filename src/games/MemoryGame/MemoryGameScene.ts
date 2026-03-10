@@ -6,6 +6,7 @@ import {
   playGoBeep,
 } from '../SortingGame/SoundGenerator';
 import { haptics } from '../../shared/haptics';
+import { hudHex } from '../../shared/theme';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -80,7 +81,7 @@ export class MemoryGameScene extends BaseGameScene {
     const fs    = (f: number) => `${Math.round(H * f)}px`;
 
     // HUD background
-    this.add.rectangle(W / 2, HUD_H / 2, W, HUD_H, 0x0d0f1e).setDepth(10);
+    this.add.rectangle(W / 2, HUD_H / 2, W, HUD_H, hudHex).setDepth(10);
 
     // Menu link
     this.add.text(W * 0.025, HUD_H / 2, '<- Menu', {

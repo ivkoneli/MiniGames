@@ -20,10 +20,12 @@
       touch-action: none;
     }
     canvas { display: block; touch-action: none; }
+    html[data-theme="light"] body { background: #f0f4ff; }
   </style>
-  <script type="module" crossorigin src="/MiniGames/assets/memoryGame-FDqBGxUn.js"></script>
+  <script>(function(){var t=localStorage.getItem("mg-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");})()</script>
+  <script type="module" crossorigin src="/MiniGames/assets/memoryGame-Clb3pHko.js"></script>
   <link rel="modulepreload" crossorigin href="/MiniGames/assets/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="modulepreload" crossorigin href="/MiniGames/assets/haptics-XPhfhxHw.js">
+  <link rel="modulepreload" crossorigin href="/MiniGames/assets/theme-2M5EsqWa.js">
   <link rel="modulepreload" crossorigin href="/MiniGames/assets/SoundGenerator-DTbIjZbB.js">
 </head>
 <body>

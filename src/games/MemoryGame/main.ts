@@ -3,6 +3,7 @@ import { MemoryGameScene } from './MemoryGameScene';
 import { AudioManager } from '../../shared/AudioManager';
 import type { MemoryConfig } from './types';
 import content from '../../content/example-memory.json';
+import { bgCss } from '../../shared/theme';
 
 const gameConfig = content as unknown as MemoryConfig;
 
@@ -20,7 +21,7 @@ const game = new Phaser.Game({
   type: Phaser.AUTO,
   width: Math.round(cssW * dpr),
   height: Math.round(cssH * dpr),
-  backgroundColor: '#070810',
+  backgroundColor: bgCss,
   render: { antialias: true, pixelArt: false },
   scene: [BootScene, MemoryGameScene],
   scale: {

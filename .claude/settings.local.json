@@ -16,7 +16,13 @@
       "Bash(grep -l \"haptics\\\\|Haptics\" games/*/index.html)",
       "WebFetch(domain:unpkg.com)",
       "WebFetch(domain:cdn.jsdelivr.net)",
-      "Bash(grep -n \"CENTER_BOTH\\\\|autoCenter\" src/games/*/main.ts)"
+      "Bash(grep -n \"CENTER_BOTH\\\\|autoCenter\" src/games/*/main.ts)",
+      "Bash(npm i web-haptics)",
+      "Bash(for f in \"f:/Desktop/poso/MiniGames/src/games/SortingGame/main.ts\" \"f:/Desktop/poso/MiniGames/src/games/MemoryGame/main.ts\" \"f:/Desktop/poso/MiniGames/src/games/BallToGoal/main.ts\")",
+      "Bash(do echo \"=== $f ===\")",
+      "Read(//f/Desktop/poso/MiniGames/**)",
+      "Bash(done)",
+      "Bash(for f in \"f:/Desktop/poso/MiniGames/src/games/BalancingGame/main.ts\" \"f:/Desktop/poso/MiniGames/src/games/CurveSelector/main.ts\" \"f:/Desktop/poso/MiniGames/src/games/StackTheOrder/main.ts\")"
     ]
   }
 }

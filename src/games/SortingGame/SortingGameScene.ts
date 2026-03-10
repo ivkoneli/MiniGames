@@ -8,6 +8,7 @@ import {
   playCountdownTick,
 } from './SoundGenerator';
 import { haptics } from '../../shared/haptics';
+import { hudHex } from '../../shared/theme';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -123,7 +124,7 @@ export class SortingGameScene extends BaseGameScene {
     // ── HUD band ─────────────────────────────────────────────────────────
     this.HUD_H = H * 0.12;
     const HUD_H = this.HUD_H;
-    this.add.rectangle(W / 2, HUD_H / 2, W, HUD_H, 0x0d0f1e).setDepth(10);
+    this.add.rectangle(W / 2, HUD_H / 2, W, HUD_H, hudHex).setDepth(10);
 
     // ── Timer bar (bottom edge of HUD) ────────────────────────────────────
     const BAR_H = Math.max(Math.round(H * 0.012), 7);

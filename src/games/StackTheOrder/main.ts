@@ -4,6 +4,7 @@ import { AudioManager } from '../../shared/AudioManager';
 import type { StackOrderConfig } from './types';
 
 import content from '../../content/example-stack-order.json';
+import { bgCss } from '../../shared/theme';
 
 const gameConfig = content as unknown as StackOrderConfig;
 
@@ -21,7 +22,7 @@ const game = new Phaser.Game({
   type: Phaser.AUTO,
   width: Math.round(cssW * dpr),
   height: Math.round(cssH * dpr),
-  backgroundColor: '#070810',
+  backgroundColor: bgCss,
   render: { antialias: true, pixelArt: false },
   scene: [BootScene, StackTheOrderScene],
   scale: {

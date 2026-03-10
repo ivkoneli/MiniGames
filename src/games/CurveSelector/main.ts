@@ -4,6 +4,7 @@ import { AudioManager } from '../../shared/AudioManager';
 import type { CurveSelectorConfig } from './types';
 
 import content from '../../content/example-math-curves.json';
+import { bgCss } from '../../shared/theme';
 
 const gameConfig = content as unknown as CurveSelectorConfig;
 
@@ -34,7 +35,7 @@ const game = new Phaser.Game({
   type: Phaser.AUTO,
   width: Math.round(cssW * dpr),
   height: Math.round(cssH * dpr),
-  backgroundColor: '#070810',
+  backgroundColor: bgCss,
   render: { antialias: true, pixelArt: false },
   scene: [BootScene, CurveSelectorScene],
   scale: {

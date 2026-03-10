@@ -20,7 +20,9 @@
       touch-action: none;
     }
     canvas { display: block; touch-action: none; }
+    html[data-theme="light"] body { background: #f0f4ff; }
   </style>
+  <script>(function(){var t=localStorage.getItem("mg-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");})()</script>
 </head>
 <body>
   <script type="module" src="/src/games/BalancingGame/main.ts"></script>

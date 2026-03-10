@@ -10,21 +10,21 @@ const H       = Math.round((window.visualViewport?.height ?? window.innerHeight)
 const W       = Math.min(Math.round((window.visualViewport?.width ?? window.innerWidth) * _dpr), Math.round(H * (4 / 3)));
 
 const HUD_H        = Math.round(H * 0.065);
-const PIVOT_Y      = Math.round(H * 0.62);
-const BEAM_ARM     = Math.round(H * 0.062);
+const PIVOT_Y      = Math.round(H * 0.60);
+const BEAM_ARM     = Math.round(H * 0.080);
 const BEAM_Y       = PIVOT_Y - BEAM_ARM;
-const BEAM_HALF    = Math.min(Math.round(W * 0.36), 260);
-const BEAM_H_PX    = Math.round(H * 0.016);
-const TRI_H        = Math.round(H * 0.095);
-const TRI_W        = Math.round(W * 0.14);
+const BEAM_HALF    = Math.round(W * 0.44);           // no cap — full seesaw width
+const BEAM_H_PX    = Math.round(H * 0.018);
+const TRI_H        = Math.round(H * 0.125);
+const TRI_W        = Math.round(W * 0.20);
 const EQ_Y         = HUD_H + Math.round(H * 0.055);
-const COEF_BOX_W   = Math.max(34, Math.round(W * 0.09));
-const COEF_BOX_H   = Math.max(38, Math.round(H * 0.052));
-const BTN_SIZE     = Math.max(38, Math.round(H * 0.050));
+const COEF_BOX_W   = Math.round(W * 0.11);
+const COEF_BOX_H   = Math.round(H * 0.060);
+const BTN_SIZE     = Math.round(H * 0.038);          // smaller +/- buttons
 const TERM_GAP     = Math.max(4,  Math.round(W * 0.016));
-const FONT_SZ_EQ   = Math.round(H * 0.028);
-const FONT_SZ_BTN  = Math.round(H * 0.025);
-const FONT_SZ_LBL  = Math.round(H * 0.024);
+const FONT_SZ_EQ   = Math.round(H * 0.040);          // bigger equation numbers
+const FONT_SZ_BTN  = Math.round(H * 0.020);          // smaller +/- label
+const FONT_SZ_LBL  = Math.round(H * 0.032);
 const CHAR_W       = Math.round(FONT_SZ_EQ * 0.58);  // estimated char width
 
 const EQ_FONT    = { fontSize: `${FONT_SZ_EQ}px`,  fontStyle: 'bold', color: '#e2e8f0', fontFamily: 'Space Grotesk, sans-serif' };
@@ -152,10 +152,10 @@ export class BalancingGameScene extends BaseGameScene {
       W / 2,             PIVOT_Y,
     );
     const groundGfx = this.track(this.add.graphics());
-    groundGfx.lineStyle(2, 0x7c3aed, 0.35);
+    groundGfx.lineStyle(3, 0x7c3aed, 0.45);
     groundGfx.beginPath();
-    groundGfx.moveTo(W / 2 - BEAM_HALF - 40, PIVOT_Y + TRI_H);
-    groundGfx.lineTo(W / 2 + BEAM_HALF + 40, PIVOT_Y + TRI_H);
+    groundGfx.moveTo(0,  PIVOT_Y + TRI_H);
+    groundGfx.lineTo(W,  PIVOT_Y + TRI_H);
     groundGfx.strokePath();
 
     this.seesawContainer.setAlpha(0);

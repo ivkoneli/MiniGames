@@ -4,6 +4,7 @@ import { AudioManager } from '../../shared/AudioManager';
 import type { BalancingGameConfig } from './types';
 
 import content from '../../content/example-balancing.json';
+import { bgCss } from '../../shared/theme';
 
 const gameConfig = content as unknown as BalancingGameConfig;
 
@@ -21,7 +22,7 @@ const game = new Phaser.Game({
   type: Phaser.AUTO,
   width: Math.round(cssW * dpr),
   height: Math.round(cssH * dpr),
-  backgroundColor: '#070810',
+  backgroundColor: bgCss,
   render: { antialias: true, pixelArt: false },
   scene: [BootScene, BalancingGameScene],
   scale: {
