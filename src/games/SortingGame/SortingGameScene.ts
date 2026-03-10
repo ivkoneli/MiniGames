@@ -237,6 +237,9 @@ export class SortingGameScene extends BaseGameScene {
     this.input.keyboard?.on('keydown-RIGHT', () => this.handleChoice('right'));
     this.input.keyboard?.on('keydown-A',     () => this.handleChoice('left'));
     this.input.keyboard?.on('keydown-D',     () => this.handleChoice('right'));
+
+    // Pre-warm AudioContext on very first touch anywhere (iOS Safari)
+    this.input.once('pointerdown', () => warmAudio());
   }
 
   protected setupGame(): void {
@@ -704,6 +707,7 @@ export class SortingGameScene extends BaseGameScene {
     const color = this.streak >= 5 ? '#ef4444' : '#f59e0b';
     const txt   = this.add.text(this.CARD_X, this.CARD_Y - this.CARD_H * 0.72, label, {
       fontFamily: FONT, fontSize: `${Math.round(this.H * 0.042)}px`, fontStyle: 'bold', color,
+      stroke: '#000000', strokeThickness: 4,
     }).setOrigin(0.5).setDepth(200).setAlpha(0).setScale(0.5);
     this.tweens.add({
       targets: txt, alpha: 1, scaleX: 1, scaleY: 1, duration: 280, ease: 'Back.Out',

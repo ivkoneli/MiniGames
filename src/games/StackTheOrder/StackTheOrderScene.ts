@@ -87,6 +87,9 @@ export class StackTheOrderScene extends BaseGameScene {
   // ─── Game setup ───────────────────────────────────────────────────────────
 
   protected setupGame(): void {
+    // Stop hook sound when scene shuts down (prevents audio leak to other scenes)
+    this.events.once('shutdown', () => { this.hookSound?.stop(); this.hookSound = null; });
+
     const config = this.gameConfig as StackOrderConfig;
 
     this.W = this.scale.width;
@@ -261,10 +264,16 @@ export class StackTheOrderScene extends BaseGameScene {
       duration: 280, ease: 'Sine.InOut', yoyo: true, repeat: -1,
     });
 
-    // Ambient hook-movement loop (plays while hook is sweeping)
-    if (this.cache.audio.exists('sfx-hook')) {
+    // Ambient hook-movement loop — start after audio is unlocked (browser autoplay policy)
+    const startHookSound = () => {
+      if (this.hookSound || !this.cache.audio.exists('sfx-hook')) return;
       this.hookSound = this.sound.add('sfx-hook', { loop: true, volume: 0.22 });
       this.hookSound.play();
+    };
+    if ((this.sound as Phaser.Sound.WebAudioSoundManager).locked) {
+      this.sound.once('unlocked', startHookSound);
+    } else {
+      startHookSound();
     }
   }
 

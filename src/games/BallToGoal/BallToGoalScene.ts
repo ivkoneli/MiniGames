@@ -12,8 +12,8 @@ import { T } from '../../shared/theme';
 const _dpr     = window.devicePixelRatio || 1;
 const H        = Math.round((window.visualViewport?.height ?? window.innerHeight) * _dpr);
 const W        = Math.min(Math.round((window.visualViewport?.width ?? window.innerWidth) * _dpr), Math.round(H * (4 / 3)));
-const HUD_H    = Math.round(H * 0.030);
-const PROMPT_H = Math.round(H * 0.030);
+const HUD_H    = Math.round(H * 0.060);
+const PROMPT_H = Math.round(H * 0.045);
 const GX       = Math.round(W * 0.014);
 const GY       = HUD_H + PROMPT_H;
 const GPAD     = Math.round(W * 0.030);
@@ -22,18 +22,19 @@ const BTN_GAP  = Math.round(W * 0.012);
 // Compare CSS pixels (not physical) for narrow/portrait detection
 const IS_NARROW = (window.visualViewport?.width ?? window.innerWidth) < 900;
 
-// Narrow: full-width graph on top (52%), 2×2 button grid below
+// Narrow: graph on top, buttons fixed to bottom 30% of screen
 // Wide:   graph on left, vertical button sidebar on right
+const BTN_AREA_H = IS_NARROW ? Math.round(H * 0.30) : 0;
 const GW = IS_NARROW ? W - GX * 2 : W - 240;
 const GH = IS_NARROW
-  ? Math.round((H - GY - Math.round(H * 0.005)) * 0.44)
+  ? H - GY - BTN_AREA_H - Math.round(H * 0.010)
   : H - GY - Math.round(H * 0.005);
 
 const BTN_W = IS_NARROW
   ? Math.round((GW - BTN_GAP) / 2)
   : W - (GX + GW + 12) - 12;
 const BTN_H = IS_NARROW
-  ? Math.round((H - GY - GH - Math.round(H * 0.015) - BTN_GAP) / 2)
+  ? Math.round((BTN_AREA_H - BTN_GAP - Math.round(H * 0.015)) / 2)
   : Math.max(Math.round(H * 0.080), Math.round(GH * 0.23));
 const BTN_X = GX + GW + 12; // only meaningful in wide mode
 
@@ -162,7 +163,7 @@ export class BallToGoalScene extends BaseGameScene {
     if (level.description) {
       const prompt = this.track(
         this.add.text(W / 2, descY, level.description, {
-          fontSize: `${Math.round(H * 0.022)}px`, fontStyle: 'bold', color: T.text,
+          fontSize: `${Math.round(H * 0.026)}px`, fontStyle: 'bold', color: T.text,
           fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - Math.round(W * 0.04) },
         }).setOrigin(0.5, 0).setAlpha(0),
       );

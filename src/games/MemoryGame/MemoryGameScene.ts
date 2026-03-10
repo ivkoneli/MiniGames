@@ -107,6 +107,9 @@ export class MemoryGameScene extends BaseGameScene {
     this.levelText = this.add.text(W * 0.975, HUD_H / 2, 'L1/1', {
       fontFamily: FONT, fontSize: fs(0.018), color: '#606880',
     }).setOrigin(1, 0.5).setDepth(20);
+
+    // Pre-warm AudioContext on very first touch (iOS Safari)
+    this.input.once('pointerdown', () => warmAudio());
   }
 
   protected setupGame(): void {

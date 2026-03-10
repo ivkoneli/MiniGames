@@ -12,8 +12,8 @@ import { T } from '../../shared/theme';
 const _dpr = window.devicePixelRatio || 1;
 const H    = Math.round((window.visualViewport?.height ?? window.innerHeight) * _dpr);
 const W    = Math.min(Math.round((window.visualViewport?.width ?? window.innerWidth) * _dpr), Math.round(H * (4 / 3)));
-const HUD_H    = Math.round(H * 0.033);
-const PROMPT_H = Math.round(H * 0.030);
+const HUD_H    = Math.round(H * 0.060);
+const PROMPT_H = Math.round(H * 0.055);
 const MARGIN   = Math.round(W * 0.015);
 const GAP      = Math.round(W * 0.012);
 const PANEL_W  = Math.round((W - MARGIN * 2 - GAP) / 2);
@@ -59,7 +59,7 @@ export class CurveSelectorScene extends BaseGameScene {
   // ─── BaseGameScene hooks ───────────────────────────────────────
 
   protected setupUI(): void {
-    const fs13  = `${Math.round(H * 0.019)}px`;
+    const fs13  = `${Math.round(H * 0.024)}px`;
     const hudY  = Math.round(HUD_H * 0.5);
     this.add
       .text(Math.round(W * 0.014), hudY, '← Menu', { fontSize: fs13, color: '#475569', fontFamily: 'Space Grotesk, sans-serif' })
@@ -100,11 +100,11 @@ export class CurveSelectorScene extends BaseGameScene {
     this.progressText.setText(`Q ${index + 1}  /  ${this.questions.length}`);
     this.scoreText.setText(`${this.score.correct} correct`);
 
-    const promptY = HUD_H + Math.round(H * 0.004);
+    const promptY = HUD_H + Math.round(H * 0.010);
     const prompt = this.track(
       this.add
         .text(W / 2, promptY, question.label, {
-          fontSize: `${Math.round(H * 0.023)}px`, fontStyle: 'bold', color: T.text,
+          fontSize: `${Math.round(H * 0.028)}px`, fontStyle: 'bold', color: T.text,
           fontFamily: 'Space Grotesk, sans-serif', align: 'center', wordWrap: { width: W - Math.round(W * 0.04) },
         })
         .setOrigin(0.5, 0).setAlpha(0),

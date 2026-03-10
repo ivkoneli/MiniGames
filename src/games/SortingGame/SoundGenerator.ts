@@ -93,12 +93,14 @@ export function playCountdownTick(volume = 0.28, onEnd?: () => void): void {
 export function warmAudio(): void {
   try {
     const ctx = getCtx();
+    // Play a near-silent 1ms oscillator — the most reliable iOS unlock technique
+    const osc  = ctx.createOscillator();
+    const gain = ctx.createGain();
+    gain.gain.value = 0.0001;
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.001);
     if (ctx.state !== 'running') ctx.resume();
-    // Play a 1-sample silent buffer — unlocks audio on iOS Safari within the gesture
-    const buf = ctx.createBuffer(1, 1, ctx.sampleRate);
-    const src = ctx.createBufferSource();
-    src.buffer = buf;
-    src.connect(ctx.destination);
-    src.start(0);
   } catch { /* ignore */ }
 }
